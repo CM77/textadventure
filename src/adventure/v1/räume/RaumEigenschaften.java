@@ -1,6 +1,6 @@
-package consolen_adventure.v1;
+package adventure.v1.räume;
 
-public interface Raum {
+public interface RaumEigenschaften {
 
 	void zeigeRaum();
 
