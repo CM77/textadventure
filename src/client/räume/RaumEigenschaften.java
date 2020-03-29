@@ -1,4 +1,4 @@
-package adventure.v1.räume;
+package client.räume;
 
 public interface RaumEigenschaften {
 

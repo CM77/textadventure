@@ -1,4 +1,5 @@
-package adventure.v1;
+package client;
+
 
 import java.awt.Point;
 import java.io.IOException;
@@ -8,9 +9,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import adventure.v1.räume.Marienplatz;
-import adventure.v1.räume.Raum;
-import adventure.v1.spielakteure.Spieler;
+import client.räume.Marienplatz;
+import client.räume.Raum;
+import client.spielakteure.Spieler;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

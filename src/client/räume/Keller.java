@@ -1,6 +1,6 @@
-package adventure.v1.räume;
+package client.räume;
 
-import adventure.v1.Spielobjekt;
+import client.Spielobjekt;
 
 public class Keller extends Raum {
 
@@ -18,6 +18,5 @@ public class Keller extends Raum {
 	public boolean benutzbarBei(Spielobjekt objekt) {
 		// TODO konkrete Gegenstände hier rein, die im Raum etwas bewirken
 		return false;
-	}	
-
+	}
 }

@@ -1,4 +1,5 @@
-package adventure.v1;
+package client;
+
 
 public abstract class Spielobjekt {
 

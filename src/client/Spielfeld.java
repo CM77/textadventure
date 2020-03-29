@@ -1,13 +1,14 @@
-package adventure.v1;
+package client;
+
 
 import java.awt.Point;
 import java.util.HashMap;
 
-import adventure.v1.räume.Kapellenstraße;
-import adventure.v1.räume.Keller;
-import adventure.v1.räume.Marienplatz;
-import adventure.v1.räume.Raum;
-import adventure.v1.räume.Stachus;
+import client.räume.Kapellenstraße;
+import client.räume.Keller;
+import client.räume.Marienplatz;
+import client.räume.Raum;
+import client.räume.Stachus;
 
 public class Spielfeld {
 

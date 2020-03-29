@@ -1,8 +1,8 @@
-package adventure.v1.spielakteure;
+package client.spielakteure;
 
 import java.awt.Point;
 
-import adventure.v1.Spielfigur;
+import client.Spielfigur;
 
 public class Monster extends Spielfigur{
 

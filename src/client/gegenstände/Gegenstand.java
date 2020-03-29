@@ -1,6 +1,6 @@
-package adventure.v1.gegenstände;
+package client.gegenstände;
 
-import adventure.v1.Spielobjekt;
+import client.Spielobjekt;
 
 public abstract class Gegenstand extends Spielobjekt {
 

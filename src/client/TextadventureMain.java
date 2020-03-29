@@ -1,4 +1,5 @@
-package adventure.v1;
+package client;
+
 
 import javafx.application.Application;
 import javafx.scene.Parent;

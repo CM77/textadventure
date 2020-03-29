@@ -1,6 +1,6 @@
-package adventure.v1.räume;
+package client.räume;
 
-import adventure.v1.Spielobjekt;
+import client.Spielobjekt;
 
 public abstract class Raum extends Spielobjekt {
 

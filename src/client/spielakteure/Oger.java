@@ -1,4 +1,4 @@
-package adventure.v1.spielakteure;
+package client.spielakteure;
 
 import java.awt.Point;
 
