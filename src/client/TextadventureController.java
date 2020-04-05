@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
@@ -68,12 +69,15 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void neuenButtonErzeugen() {
-		Button button = new Button("My Button");
-		button.setAlignment(Pos.BASELINE_LEFT);
-		vboxOben.getChildren().addAll(button);
-		button.setMaxWidth(Double.MAX_VALUE);
-vboxOben.setVgrow(button, Priority.ALWAYS);
+		Button buttonAuswahlAktion = new Button("button-auswahl");
+		buttonAuswahlAktion.getStyleClass().add("buttonAuswahlAktion");
+		buttonAuswahlAktion.setAlignment(Pos.BASELINE_LEFT);
+		vboxOben.getChildren().addAll(buttonAuswahlAktion);
+		buttonAuswahlAktion.setMaxWidth(Double.MAX_VALUE);
+		VBox.setVgrow(buttonAuswahlAktion, Priority.ALWAYS);
+		
 //TODO Buttons korrekten Funktionen zuweisen (z.B. Raum-Funktionen)
+	
 	}
 
 	public Parent getRoot() {
@@ -89,5 +93,4 @@ vboxOben.setVgrow(button, Priority.ALWAYS);
 		}
 		return Spielfeld.mapMitRäumenInDerSpielwelt.get(aktuelleSpielerPos);
 	}
-
 }

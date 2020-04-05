@@ -1,0 +1,25 @@
+
+
+.buttonAuswahlAktion{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+}
+
+.buttonAuswahlAktion:focused {
+    -fx-border-color: transparent, black;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.buttonAuswahlAktion:pressed {
+    -fx-background-color: black;
+    -fx-border-width: 0;
+    -fx-border-style: none;
+    -fx-text-fill: white;
+}
+

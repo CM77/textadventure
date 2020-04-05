@@ -15,6 +15,7 @@ public class TextadventureMain extends Application {
 		
 		Parent root = controller.getRoot();
 	    Scene scene = new Scene(root);
+	    scene.getStylesheets().add("client/stylesheet.css");
 	    primaryStage.setScene(scene);
 	    primaryStage.show();
 	    primaryStage.setTitle("Mein Zimmer");
