@@ -41,8 +41,6 @@ public class TextadventureController implements Initializable {
 		return loader.getController();
 	}
 
-	private static Spielfeld spielfeld = new Spielfeld();
-
 	@FXML
 	private Parent root;
 	@FXML
@@ -60,7 +58,7 @@ public class TextadventureController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		spielfeld.initSpielfeld();
+		Spielfeld.initSpielfeld();
 		Spieler spieler = new Spieler(new Point (1,0));
 		
 		raumButton.setOnAction(e -> {
@@ -84,12 +82,12 @@ vboxOben.setVgrow(button, Priority.ALWAYS);
 
 	private static Raum pruefePositionSpieler(Spielfigur spielfigur) {
 	Point aktuelleSpielerPos = null;	
-		for (Point möglicheSpielerPos : spielfeld.mapMitRäumenInDerSpielwelt.keySet()) {
+		for (Point möglicheSpielerPos : Spielfeld.mapMitRäumenInDerSpielwelt.keySet()) {
 			if (möglicheSpielerPos.equals(spielfigur.getPosition())) {
 				aktuelleSpielerPos = möglicheSpielerPos;
 			}
 		}
-		return spielfeld.mapMitRäumenInDerSpielwelt.get(aktuelleSpielerPos);
+		return Spielfeld.mapMitRäumenInDerSpielwelt.get(aktuelleSpielerPos);
 	}
 
 }
