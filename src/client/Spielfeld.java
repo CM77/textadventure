@@ -12,14 +12,14 @@ import client.räume.Stachus;
 
 public class Spielfeld {
 
-	HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
+	static HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
 
-	final public Point MARIENPLATZ = new Point(1, 0);
-	final public Point STACHUS = new Point(0, 0);
-	final public Point KAPELLENSTRASSE = new Point(0, 1);
-	final public Point KELLER = new Point(0, 2);
+	static final public Point MARIENPLATZ = new Point(1, 0);
+	static final public Point STACHUS = new Point(0, 0);
+	static final public Point KAPELLENSTRASSE = new Point(0, 1);
+	static final public Point KELLER = new Point(0, 2);
 	
-	public void initSpielfeld() {
+	public static void initSpielfeld() {
 		mapMitRäumenInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
 		mapMitRäumenInDerSpielwelt.put(KELLER, new Keller("Keller"));
 		mapMitRäumenInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
