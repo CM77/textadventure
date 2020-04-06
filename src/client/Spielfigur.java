@@ -1,6 +1,5 @@
 package client;
 
-
 import java.awt.Point;
 
 public class Spielfigur {
@@ -11,26 +10,33 @@ public class Spielfigur {
 	private int parade;
 	private String waffe;
 	private Point spielerPosition;
+
+	public String getNameSpielfigur() {
+		return nameSpielfigur;
+	}
 	
+	public void setNameSpielfigur(String nameSpielfigur) {
+		this.nameSpielfigur = nameSpielfigur;
+	}
+
 	public void attackieren() {
 	}
-	
+
 	public void parieren() {
 	}
-	
+
 	public Spielfigur(Point spielerPosition) {
 		this.spielerPosition = spielerPosition;
-	} 
-	
+	}
+
 	public Point getPosition() {
 		return spielerPosition;
 	}
-	
-	
+
 	public String untersuchen() {
 		return "Du siehst hier nix Besonderes";
 	}
-	
+
 	public void nachNordenGehen(Point spielerPosition) {
 		spielerPosition.y = Math.max(0, spielerPosition.y + 1);
 		System.out.println("Du gehst nach Norden.");
