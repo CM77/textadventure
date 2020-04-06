@@ -1,35 +1,18 @@
 package client;
 
-
 import java.awt.Point;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Scanner;
-
-import client.räume.Marienplatz;
 import client.räume.Raum;
 import client.spielakteure.Spieler;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 

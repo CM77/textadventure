@@ -5,16 +5,17 @@ import java.awt.Point;
 public class Spielfigur {
 
 	private String nameSpielfigur;
-	private int staerke;
-	private int attacke;
-	private int parade;
-	private String waffe;
+//  TODO Eigenschaften ausfeilen
+//  private int staerke;
+//	private int attacke;
+//	private int parade;
+//	private String waffe;
 	private Point spielerPosition;
 
 	public String getNameSpielfigur() {
 		return nameSpielfigur;
 	}
-	
+
 	public void setNameSpielfigur(String nameSpielfigur) {
 		this.nameSpielfigur = nameSpielfigur;
 	}
