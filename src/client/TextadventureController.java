@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import client.räume.Raum;
 import client.spielakteure.Spieler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,16 +38,17 @@ public class TextadventureController implements Initializable {
 	private VBox vboxOben;
 	@FXML
 	private TextArea textAreaUnten;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Spielfeld.initSpielfeld();
-		Spieler spieler = new Spieler(new Point (1,0));
-		
+		Spielfeld spielfeld = new Spielfeld();
+		spielfeld.initSpielfeld();
+		Spieler spieler = new Spieler(new Point(1, 0));
+
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(pruefePositionSpieler(spieler).getNameDesSpielobjekts());
+			textAreaUnten.setText(spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
 			neuenButtonErzeugen();
-		    });
+		});
 	}
 
 	private void neuenButtonErzeugen() {
@@ -58,22 +58,14 @@ public class TextadventureController implements Initializable {
 		vboxOben.getChildren().addAll(buttonAuswahlAktion);
 		buttonAuswahlAktion.setMaxWidth(Double.MAX_VALUE);
 		VBox.setVgrow(buttonAuswahlAktion, Priority.ALWAYS);
-		
-//TODO Buttons korrekten Funktionen zuweisen (z.B. Raum-Funktionen)
-	
+
+//TODO Methode entwickeln, die - angepasst auf die jeweiligen Ebene (Raum, Gegenstände, Rucksack), 
+		// in die der User geklickt hat - entsprechenden Aktionen als Buttons anzeigt 
+
 	}
 
 	public Parent getRoot() {
 		return root;
 	}
 
-	private static Raum pruefePositionSpieler(Spielfigur spielfigur) {
-	Point aktuelleSpielerPos = null;	
-		for (Point möglicheSpielerPos : Spielfeld.mapMitRäumenInDerSpielwelt.keySet()) {
-			if (möglicheSpielerPos.equals(spielfigur.getPosition())) {
-				aktuelleSpielerPos = möglicheSpielerPos;
-			}
-		}
-		return Spielfeld.mapMitRäumenInDerSpielwelt.get(aktuelleSpielerPos);
-	}
 }
