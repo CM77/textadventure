@@ -33,8 +33,6 @@ public class TextadventureController implements Initializable {
 	private Button gegenstaendeButton;
 	@FXML
 	private Button rucksackButton;
-//	@FXML
-//	private TextArea textAreaOben;
 	@FXML
 	private VBox vboxOben;
 	@FXML
