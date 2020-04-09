@@ -39,14 +39,11 @@
             <ScrollPane fitToHeight="true" fitToWidth="true">
                <content>
                   <VBox fx:id="vboxOben" />
-               </content></ScrollPane>
-            	
-                        <HBox alignment="CENTER" SplitPane.resizableWithParent="false">
+               </content>
+            </ScrollPane>
+                    <HBox alignment="CENTER" SplitPane.resizableWithParent="false">
                <children>
                   <Button fx:id="raumButton" minWidth="90.0" mnemonicParsing="false" text="Raum">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
