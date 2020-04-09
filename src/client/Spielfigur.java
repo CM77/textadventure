@@ -38,23 +38,23 @@ public class Spielfigur {
 		return "Du siehst hier nix Besonderes";
 	}
 
-	public void nachNordenGehen(Point spielerPosition) {
+	public String nachNordenGehen(Point spielerPosition) {
 		spielerPosition.y = Math.max(0, spielerPosition.y + 1);
-		System.out.println("Du gehst nach Norden.");
+		return "Du gehst nach Norden.";
 	}
 
-	public void nachSüdenGehen(Point spielerPosition) {
+	public String nachSüdenGehen(Point spielerPosition) {
 		spielerPosition.y = Math.min(4, spielerPosition.y - 1);
-		System.out.println("Du gehst nach Süden.");
+		return "Du gehst nach Süden.";
 	}
 
-	public void nachOstenGehen(Point spielerPosition) {
+	public String nachOstenGehen(Point spielerPosition) {
 		spielerPosition.x = Math.max(0, spielerPosition.x + 1);
-		System.out.println("Du gehst nach Osten.");
+		return "Du gehst nach Osten.";
 	}
 
-	public void nachWestenGehen(Point spielerPosition) {
+	public String nachWestenGehen(Point spielerPosition) {
 		spielerPosition.x = Math.min(4, spielerPosition.x - 1);
-		System.out.println("Du gehst nach Westen.");
+		return "Du gehst nach Westen.";
 	}
 }
