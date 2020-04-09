@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import client.spielakteure.Spieler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,14 +40,22 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private TextArea textAreaUnten;
 
+	Spieler spieler = new Spieler(new Point(1, 0));
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Spielfeld spielfeld = new Spielfeld();
-		spielfeld.initSpielfeld();
-		Spieler spieler = new Spieler(new Point(1, 0));
+		Spielfeld.initSpielfeld();
 
+//		raumButton.setOnAction(e -> {
+//			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
+//			neuenButtonErzeugen();
+//		});
+		zeigeRaumUndBewegungsmöglichkeitenAn();
+	}
+
+	private void zeigeRaumUndBewegungsmöglichkeitenAn() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
+			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
 			neuenButtonErzeugen();
 		});
 	}
@@ -60,7 +69,7 @@ public class TextadventureController implements Initializable {
 		VBox.setVgrow(buttonAuswahlAktion, Priority.ALWAYS);
 
 //TODO Methode entwickeln, die - angepasst auf die jeweiligen Ebene (Raum, Gegenstände, Rucksack), 
-		// in die der User geklickt hat - entsprechenden Aktionen als Buttons anzeigt 
+		// in die der User geklickt hat - entsprechenden Aktionen als Buttons anzeigt
 
 	}
 
