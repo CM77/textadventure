@@ -1,6 +1,6 @@
-package de.minaty.adventure.client.räume;
+package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.Spielobjekt;
+import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
 public class Stachus extends Raum {
 

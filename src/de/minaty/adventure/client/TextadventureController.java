@@ -38,7 +38,9 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private TextArea textAreaUnten;
 
-	Spieler spieler = new Spieler(new Point(1, 0));
+	// TODO Methode für individuellen Spielernamen und Zufallszahl bei Stärke,
+	// Attacke und Parade
+	Spieler spieler = new Spieler("Spieler", new Point(1, 0), 30, 10, 10);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,7 +55,7 @@ public class TextadventureController implements Initializable {
 
 	private void zeigeRaumUndBewegungsmöglichkeitenAn() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
+			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getName());
 			neuenButtonErzeugen();
 		});
 	}

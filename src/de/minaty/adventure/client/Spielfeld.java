@@ -3,11 +3,12 @@ package de.minaty.adventure.client;
 import java.awt.Point;
 import java.util.HashMap;
 
-import de.minaty.adventure.client.räume.Kapellenstraße;
-import de.minaty.adventure.client.räume.Keller;
-import de.minaty.adventure.client.räume.Marienplatz;
-import de.minaty.adventure.client.räume.Raum;
-import de.minaty.adventure.client.räume.Stachus;
+import de.minaty.adventure.client.raeume.Kapellenstraße;
+import de.minaty.adventure.client.raeume.Keller;
+import de.minaty.adventure.client.raeume.Marienplatz;
+import de.minaty.adventure.client.raeume.Raum;
+import de.minaty.adventure.client.raeume.Stachus;
+import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
 
@@ -25,10 +26,10 @@ public class Spielfeld {
 		mapMitRäumenInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
-	public static Raum pruefePositionSpieler(Spielfigur spielfigur) {
+	public static Raum pruefePositionSpieler(Spieler spieler) {
 		Point aktuelleSpielerPos = null;
 		for (Point möglicheSpielerPos : Spielfeld.mapMitRäumenInDerSpielwelt.keySet()) {
-			if (möglicheSpielerPos.equals(spielfigur.getPosition())) {
+			if (möglicheSpielerPos.equals(spieler.getPosition())) {
 				aktuelleSpielerPos = möglicheSpielerPos;
 			}
 		}

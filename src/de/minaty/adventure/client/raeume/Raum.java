@@ -1,6 +1,6 @@
-package de.minaty.adventure.client.räume;
+package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.Spielobjekt;
+import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
 public abstract class Raum extends Spielobjekt {
 
@@ -9,7 +9,7 @@ public abstract class Raum extends Spielobjekt {
 	}
 	
 	public String getNameDesRaums() {
-		return super.getNameDesSpielobjekts();
+		return super.getName();
 	}
 
 	public abstract String untersuchen();

@@ -2,14 +2,10 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-import de.minaty.adventure.client.Spielfigur;
+public abstract class Monster extends Spielfigur {
 
-public class Monster extends Spielfigur{
-
-	Monster(Point spielerPosition) {
-		super(spielerPosition);
+	Monster(String name, Point position, int staerke, int attacke, int parade) {
+		super(name, position, staerke, attacke, parade);
 	}
 
-
 }
-

@@ -1,4 +1,4 @@
-package de.minaty.adventure.client.räume;
+package de.minaty.adventure.client.raeume;
 
 public interface RaumEigenschaften {
 
