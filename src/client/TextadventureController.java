@@ -59,7 +59,8 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void neuenButtonErzeugen() {
-		Button buttonAuswahlAktion = new Button("button-auswahl");
+		String buttonBeschriftung = "";
+		Button buttonAuswahlAktion = new Button(buttonBeschriftung);
 		buttonAuswahlAktion.getStyleClass().add("buttonAuswahlAktion");
 		buttonAuswahlAktion.setAlignment(Pos.BASELINE_LEFT);
 		vboxOben.getChildren().addAll(buttonAuswahlAktion);
