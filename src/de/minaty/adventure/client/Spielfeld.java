@@ -1,13 +1,13 @@
-package client;
+package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.util.HashMap;
 
-import client.räume.Kapellenstraße;
-import client.räume.Keller;
-import client.räume.Marienplatz;
-import client.räume.Raum;
-import client.räume.Stachus;
+import de.minaty.adventure.client.räume.Kapellenstraße;
+import de.minaty.adventure.client.räume.Keller;
+import de.minaty.adventure.client.räume.Marienplatz;
+import de.minaty.adventure.client.räume.Raum;
+import de.minaty.adventure.client.räume.Stachus;
 
 public class Spielfeld {
 

@@ -1,8 +1,8 @@
-package client.spielakteure;
+package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-import client.Spielfigur;
+import de.minaty.adventure.client.Spielfigur;
 
 public class Spieler extends Spielfigur {
 

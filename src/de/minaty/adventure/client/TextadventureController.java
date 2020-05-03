@@ -1,11 +1,11 @@
-package client;
+package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import client.spielakteure.Spieler;
+import de.minaty.adventure.client.spielakteure.Spieler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

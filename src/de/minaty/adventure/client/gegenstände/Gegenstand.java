@@ -1,6 +1,6 @@
-package client.gegenstände;
+package de.minaty.adventure.client.gegenstände;
 
-import client.Spielobjekt;
+import de.minaty.adventure.client.Spielobjekt;
 
 public abstract class Gegenstand extends Spielobjekt {
 

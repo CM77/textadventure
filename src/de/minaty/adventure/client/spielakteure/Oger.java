@@ -1,4 +1,4 @@
-package client.spielakteure;
+package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 

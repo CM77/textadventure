@@ -1,4 +1,4 @@
-package client;
+package de.minaty.adventure.client;
 
 import java.awt.Point;
 

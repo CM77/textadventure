@@ -1,6 +1,6 @@
-package client.räume;
+package de.minaty.adventure.client.räume;
 
-import client.Spielobjekt;
+import de.minaty.adventure.client.Spielobjekt;
 
 public class Marienplatz extends Raum {
 	
