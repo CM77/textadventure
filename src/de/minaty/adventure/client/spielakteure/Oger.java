@@ -2,7 +2,7 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-public class Oger extends Monster {
+public final class Oger extends Monster {
 
 	public Oger(String name, Point position, int staerke, int attacke, int parade) {
 		super(name, position, staerke, attacke, parade);
