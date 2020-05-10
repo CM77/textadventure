@@ -2,17 +2,17 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-public abstract class Spielfigur extends Spielobjekt {
+import de.minaty.adventure.client.Anschaubar;
 
-	private Point position;
+public abstract class Spielfigur extends Spielobjekt implements Anschaubar {
+
 	private int staerke;
 	private int attacke;
 	private int parade;
 
-	Spielfigur(String name, Point position, int staerke, int attacke, int parade) {
-		super(name);
+	Spielfigur(Point position, int staerke, int attacke, int parade) {
+		super(position);
 		this.staerke = staerke;
-		this.position = position;
 		this.attacke = attacke;
 		this.parade = parade;
 	}
@@ -47,11 +47,4 @@ public abstract class Spielfigur extends Spielobjekt {
 		this.parade = parade;
 	}
 
-	public Point getPosition() {
-		return position;
-	}
-
-	public void setPosition(Point position) {
-		this.position = position;
-	}
 }

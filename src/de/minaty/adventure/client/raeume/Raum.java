@@ -1,16 +1,22 @@
 package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.spielakteure.Spielobjekt;
+import de.minaty.adventure.client.Untersuchbar;
 
-public abstract class Raum extends Spielobjekt {
+public abstract class Raum implements Untersuchbar {
 
-	Raum(String nameDesSpielobjekts) {
-		super(nameDesSpielobjekts);
+	private String name;
+
+	Raum(String name) {
+		super();
+		this.name = name;
 	}
-	
-	public String getNameDesRaums() {
-		return super.getName();
+
+	public String getName() {
+		return name;
 	}
 
-	public abstract String untersuchen();
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

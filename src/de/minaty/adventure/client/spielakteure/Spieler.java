@@ -6,9 +6,12 @@ public final class Spieler extends Spielfigur {
 
 	// TODO Interface Waffe für Spieler und Monster
 
-	public Spieler(String name, Point position, int staerke, int attacke, int parade) {
-		super(name, position, staerke, attacke, parade);
+	public Spieler(Point position, int staerke, int attacke, int parade) {
+		super(position, staerke, attacke, parade);
 	}
+
+	// TODO da Spielobjekte ja generell Positionen haben und verändern können,
+	// folgende Methoden in Interface?
 
 	public String nachNordenGehen(Point spielerPosition) {
 		spielerPosition.y = Math.max(0, spielerPosition.y + 1);
@@ -28,5 +31,10 @@ public final class Spieler extends Spielfigur {
 	public String nachWestenGehen(Point spielerPosition) {
 		spielerPosition.x = Math.min(4, spielerPosition.x - 1);
 		return "Du gehst nach Westen.";
+	}
+
+	@Override
+	public String anschauen() {
+		return "Du schaust dich selber an, aber irgendwie siehst du nur deine Hände, deine Hose und deine Schuhe.";
 	}
 }

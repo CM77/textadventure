@@ -1,8 +1,6 @@
 package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.spielakteure.Spielobjekt;
-
-public class Keller extends Raum {
+public final class Keller extends Raum {
 
 	public Keller(String nameDesSpielobjekts) {
 		super(nameDesSpielobjekts);
@@ -14,9 +12,4 @@ public class Keller extends Raum {
 				+ "Eine nackte Glühbirne taucht den Raum in fahles, gespenstisches Licht. Es ist verdächtig still.";
 	}
 
-	@Override
-	public boolean benutzbarBei(Spielobjekt objekt) {
-		// TODO konkrete Gegenstände hier rein, die im Raum etwas bewirken
-		return false;
-	}
 }

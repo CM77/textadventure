@@ -40,7 +40,7 @@ public class TextadventureController implements Initializable {
 
 	// TODO Methode für individuellen Spielernamen und Zufallszahl bei Stärke,
 	// Attacke und Parade
-	Spieler spieler = new Spieler("Spieler", new Point(1, 0), 30, 10, 10);
+	Spieler spieler = new Spieler(new Point(1, 0), 30, 10, 10);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

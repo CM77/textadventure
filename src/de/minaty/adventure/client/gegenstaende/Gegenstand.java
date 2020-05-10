@@ -1,11 +1,25 @@
 package de.minaty.adventure.client.gegenstaende;
 
+import java.awt.Point;
+
+import de.minaty.adventure.client.Untersuchbar;
 import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
-public abstract class Gegenstand extends Spielobjekt {
+public abstract class Gegenstand extends Spielobjekt implements Untersuchbar {
 
-	Gegenstand(String nameDesSpielobjekts) {
-		super(nameDesSpielobjekts);
+	private int gewicht;
+
+	Gegenstand(Point position, int gewicht) {
+		super(position);
+		this.gewicht = gewicht;
+	}
+
+	public int getGewicht() {
+		return gewicht;
+	}
+
+	public void setGewicht(int gewicht) {
+		this.gewicht = gewicht;
 	}
 
 }

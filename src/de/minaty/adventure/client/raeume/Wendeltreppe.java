@@ -1,23 +1,14 @@
 package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.spielakteure.Spielobjekt;
+public final class Wendeltreppe extends Raum {
 
-public class Wendeltreppe extends Raum {
-	
-Wendeltreppe(String nameDesSpielobjekts) {
+	Wendeltreppe(String nameDesSpielobjekts) {
 		super(nameDesSpielobjekts);
 	}
 
-@Override
+	@Override
 	public String untersuchen() {
 		return "In unzählig wirkenden Stufen geht es hinab in unbekannte Tiefen. "
 				+ "Fackeln säumen die aus grobem Stein gehauenen Wände. ";
 	}
-
-@Override
-public boolean benutzbarBei(Spielobjekt objekt) {
-	// TODO konkrete Gegenstände hier rein, die im Raum etwas bewirken
-	return false;
-}
-
 }
