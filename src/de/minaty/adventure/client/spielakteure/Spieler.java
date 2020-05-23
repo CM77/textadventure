@@ -2,7 +2,7 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-public final class Spieler extends Spielfigur {
+public final class Spieler extends Spielfigur implements Bewegbar {
 
 	// TODO Interface Waffe für Spieler und Monster
 
@@ -10,31 +10,28 @@ public final class Spieler extends Spielfigur {
 		super(position, staerke, attacke, parade);
 	}
 
-	// TODO da Spielobjekte ja generell Positionen haben und verändern können,
-	// folgende Methoden in Interface?
-
-	public String nachNordenGehen(Point spielerPosition) {
-		spielerPosition.y = Math.max(0, spielerPosition.y + 1);
-		return "Du gehst nach Norden.";
-	}
-
-	public String nachSüdenGehen(Point spielerPosition) {
-		spielerPosition.y = Math.min(4, spielerPosition.y - 1);
-		return "Du gehst nach Süden.";
-	}
-
-	public String nachOstenGehen(Point spielerPosition) {
-		spielerPosition.x = Math.max(0, spielerPosition.x + 1);
-		return "Du gehst nach Osten.";
-	}
-
-	public String nachWestenGehen(Point spielerPosition) {
-		spielerPosition.x = Math.min(4, spielerPosition.x - 1);
-		return "Du gehst nach Westen.";
+	@Override
+	public String anschauen() {
+		return "Du schaust dich selber an, aber irgendwie siehst du nur deine Hände, deine Hose und deine Schuhe. Ein Spiegel verrät vielleicht mehr über dein (hoffentlich) Top-Model-haftes Aussehen.";
 	}
 
 	@Override
-	public String anschauen() {
-		return "Du schaust dich selber an, aber irgendwie siehst du nur deine Hände, deine Hose und deine Schuhe.";
+	public String nachNordenBewegen(Point spielerPosition) {
+		return "Du gehst nach Norden.";
+	}
+
+	@Override
+	public String nachSüdenBewegen(Point spielerPosition) {
+		return "Du gehst nach Süden.";
+	}
+
+	@Override
+	public String nachOstenBewegen(Point spielerPosition) {
+		return "Du gehst nach Osten.";
+	}
+
+	@Override
+	public String nachWestenBewegen(Point spielerPosition) {
+		return "Du gehst nach Westen.";
 	}
 }
