@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
-public abstract class Gegenstand extends Spielobjekt {
+public abstract class Gegenstand extends Spielobjekt implements Untersuchbar {
 
 	private int gewicht;
 
