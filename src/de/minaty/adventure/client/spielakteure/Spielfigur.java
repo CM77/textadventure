@@ -2,8 +2,6 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-import de.minaty.adventure.client.Anschaubar;
-
 public abstract class Spielfigur extends Spielobjekt implements Anschaubar {
 
 	private int staerke;

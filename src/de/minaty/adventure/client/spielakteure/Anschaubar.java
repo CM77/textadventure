@@ -1,4 +1,4 @@
-package de.minaty.adventure.client;
+package de.minaty.adventure.client.spielakteure;
 
 public interface Anschaubar {
 

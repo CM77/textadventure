@@ -7,7 +7,7 @@ public final class Stachus extends Raum {
 	}
 
 	@Override
-	public String untersuchen() {
+	public String erkunden() {
 		return "Der große Springbrunnen spritzt unablässig Wasserfontänen in die Luft. Du siehst"
 				+ "das Karlstor vor dir.";
 	}

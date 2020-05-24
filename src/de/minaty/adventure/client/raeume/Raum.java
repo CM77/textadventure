@@ -1,8 +1,6 @@
 package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.Untersuchbar;
-
-public abstract class Raum implements Untersuchbar {
+public abstract class Raum implements Erkundbar {
 
 	private String name;
 

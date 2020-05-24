@@ -2,10 +2,9 @@ package de.minaty.adventure.client.gegenstaende;
 
 import java.awt.Point;
 
-import de.minaty.adventure.client.Untersuchbar;
 import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
-public abstract class Gegenstand extends Spielobjekt implements Untersuchbar {
+public abstract class Gegenstand extends Spielobjekt {
 
 	private int gewicht;
 
@@ -21,5 +20,4 @@ public abstract class Gegenstand extends Spielobjekt implements Untersuchbar {
 	public void setGewicht(int gewicht) {
 		this.gewicht = gewicht;
 	}
-
 }

@@ -7,7 +7,7 @@ public final class Wendeltreppe extends Raum {
 	}
 
 	@Override
-	public String untersuchen() {
+	public String erkunden() {
 		return "In unzählig wirkenden Stufen geht es hinab in unbekannte Tiefen. "
 				+ "Fackeln säumen die aus grobem Stein gehauenen Wände. ";
 	}
