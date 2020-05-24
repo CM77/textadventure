@@ -1,70 +1,89 @@
-# Compiled source #
-###################
-*.com
+##############################
+## Java
+##############################
+.mtj.tmp/
 *.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
 *.jar
-*.rar
-*.tar
-*.zip
+*.war
+*.ear
+*.nar
+hs_err_pid*
 
-# Logs and databases #
-######################
-*.log
+##############################
+## Maven
+##############################
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
-# OS generated files #
-######################
-.DS_Store*
-ehthumbs.db
-Icon?
-Thumbs.db
-
-# Editor Files #
-################
-*~
-*.swp
-*.docx
-
-# Gradle Files #
-################
+##############################
+## Gradle
+##############################
+bin/
+build/
 .gradle
-.m2
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
 
-# Build output directies #
-##########################
-/target
-*/target
-/build
-*/build
-
-# IntelliJ specific files/directories #
-#######################################
-out
-.idea
+##############################
+## IntelliJ
+##############################
+out/
+.idea/
+.idea_modules/
+*.iml
 *.ipr
 *.iws
-*.iml
-atlassian-ide-plugin.xml
 
-# Eclipse specific files/directories #
-######################################
+##############################
+## Eclipse
+##############################
+.settings/
+bin/
+tmp/
+.metadata
 .classpath
 .project
-.settings
-.metadata
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.factorypath
 
-# NetBeans specific files/directories #
-#######################################
-.nbattrs
+##############################
+## NetBeans
+##############################
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+##############################
+## Visual Studio Code
+##############################
+.vscode/
+.code-workspace
+
+##############################
+## OS X
+##############################
+.DS_Store
+
+##############################
+## Editors
+##############################
+*.docx
