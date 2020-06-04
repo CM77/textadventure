@@ -55,7 +55,7 @@ public class TextadventureController implements Initializable {
 
 	private void zeigeRaumUndBewegungsmöglichkeitenAn() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getName());
+			textAreaUnten.setText(Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler).getName());
 			neuenButtonErzeugen();
 		});
 	}

@@ -26,13 +26,14 @@ public class Spielfeld {
 		mapMitRäumenInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
-	public static Raum pruefePositionSpieler(Spieler spieler) {
-		Point aktuelleSpielerPos = null;
-		for (Point möglicheSpielerPos : Spielfeld.mapMitRäumenInDerSpielwelt.keySet()) {
-			if (möglicheSpielerPos.equals(spieler.getPosition())) {
-				aktuelleSpielerPos = möglicheSpielerPos;
+	public static Raum pruefeObPositionSpielerMitPositionRaumUebereinstimmt(Spieler spieler) {
+		Point aktuelleSpielerPos = spieler.getPosition();
+		for (HashMap.Entry<Point, Raum> entry : mapMitRäumenInDerSpielwelt.entrySet()) {
+			if (aktuelleSpielerPos.equals(entry.getKey())) {
+				return entry.getValue();
 			}
 		}
-		return Spielfeld.mapMitRäumenInDerSpielwelt.get(aktuelleSpielerPos);
+		return null; // TODO null guter Stil? Lambdas?
+						// https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
 	}
 }

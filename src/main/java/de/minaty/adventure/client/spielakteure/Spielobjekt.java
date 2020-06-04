@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public abstract class Spielobjekt {
 
-	private Point position;
+	protected Point position;
 
 	protected Spielobjekt(Point position) {
 		super();
