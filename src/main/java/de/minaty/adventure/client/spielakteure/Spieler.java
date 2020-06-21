@@ -16,22 +16,26 @@ public final class Spieler extends Spielfigur implements Bewegbar {
 	}
 
 	@Override
-	public String nachNordenBewegen(Point spielerPosition) {
+	public String nachNordenBewegen() {
+		position.y = Math.max(0, position.y + 1);
 		return "Du gehst nach Norden.";
 	}
 
 	@Override
-	public String nachSüdenBewegen(Point spielerPosition) {
+	public String nachSüdenBewegen() {
+		position.y = Math.min(4, position.y - 1);
 		return "Du gehst nach Süden.";
 	}
 
 	@Override
-	public String nachOstenBewegen(Point spielerPosition) {
+	public String nachOstenBewegen() {
+		position.x = Math.max(0, position.x + 1);
 		return "Du gehst nach Osten.";
 	}
 
 	@Override
-	public String nachWestenBewegen(Point spielerPosition) {
+	public String nachWestenBewegen() {
+		position.x = Math.min(4, position.x - 1);
 		return "Du gehst nach Westen.";
 	}
 }

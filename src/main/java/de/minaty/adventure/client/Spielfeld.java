@@ -12,7 +12,7 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
 
-	private static HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
+	public static HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
 
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);

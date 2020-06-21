@@ -7,18 +7,46 @@ import java.awt.Point;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
+import de.minaty.adventure.client.raeume.Marienplatz;
 
-class SpielerTest {
+class SpielerTest extends BewegungsTest {
 
-	// TODO Test rund machen
+	// TODO Test-Setup rund machen, Refactoring?
 
 	@Test
-	void test_Position_Spieler_Prüfen_Ohne_Bewegung() {
+	public void test_Position_Spieler_Prüfen_Ohne_Bewegung() {
 		Point aktuellePosition = new Point(1, 0);
 		Spielfeld.initSpielfeld();
 		Spieler spieler = new Spieler(aktuellePosition, 30, 12, 10);
 
-		assertEquals(aktuellePosition, Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler));
+		assertEquals(Spielfeld.mapMitRäumenInDerSpielwelt.containsValue(new Marienplatz("Marienplatz")),
+				Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler));
+	}
+
+	// TODO weitere Tests
+
+	@Override
+	public String nachNordenBewegen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String nachSüdenBewegen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String nachOstenBewegen() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String nachWestenBewegen() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
