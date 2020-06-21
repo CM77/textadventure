@@ -1,7 +1,6 @@
 package de.minaty.adventure.client;
 
 import java.awt.Point;
-import java.awt.TextArea;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
