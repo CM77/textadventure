@@ -17,4 +17,5 @@ public abstract class Spielobjekt {
 	public void setPosition(Point position) {
 		this.position = position;
 	}
+
 }
