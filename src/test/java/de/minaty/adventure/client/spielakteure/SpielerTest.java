@@ -48,7 +48,7 @@ class SpielerTest {
 
 		// When:
 		for (int i = 0; i < zufallszahlBisFuenfzehn; i++) {
-			spielerActual.nachSüdenBewegen();
+			spielerActual.nachSuedenBewegen();
 			spielerActual.nachOstenBewegen();
 		}
 

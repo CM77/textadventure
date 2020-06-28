@@ -6,7 +6,7 @@ public interface Bewegbar {
 
 	public abstract String nachNordenBewegen();
 
-	public abstract String nachSüdenBewegen();
+	public abstract String nachSuedenBewegen();
 
 	public abstract String nachOstenBewegen();
 
