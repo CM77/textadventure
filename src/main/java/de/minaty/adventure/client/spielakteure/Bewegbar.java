@@ -1,7 +1,5 @@
 package de.minaty.adventure.client.spielakteure;
 
-import java.awt.Point;
-
 public interface Bewegbar {
 
 	public abstract String nachNordenBewegen();
