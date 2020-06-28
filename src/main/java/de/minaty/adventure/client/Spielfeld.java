@@ -33,7 +33,6 @@ public class Spielfeld {
 				return entry.getValue();
 			}
 		}
-		return null; // TODO null guter Stil? Lambdas?
-						// https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+		return null; // TODO kann man das besser lösen?
 	}
 }

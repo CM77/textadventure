@@ -3,58 +3,83 @@ package de.minaty.adventure.client.spielakteure;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Point;
+import java.util.Random;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
 
-class SpielerTest extends BewegungsTest {
+class SpielerTest {
 
-	// TODO Test-Setup rund machen, Refactoring?
+	Point startPosition = new Point(1, 0);
+	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);
 
-	// private static Point aktuellePosition;
+	@Test
+	public void test_Position_Spieler__Mit_einfacher_Bewegung_nach_Norden() {
+		// Given:
 
-	// TODO Spieler hat als Point nur "null", nochmal Konstruktor und Vererbungen
-	// überprüfen
-	Point aktuellePosition = new Point(1, 0);
-	Spieler spieler = new Spieler(aktuellePosition, 30, 12, 10);
+		// When:
+		spielerActual.nachNordenBewegen();
 
-	@BeforeAll
-	static void beforeFunction() {
+		// Then:
+		assertEquals(spielerActual.getPosition(), new Point(1, 0 + 1));
 	}
 
 	@Test
-	public void test_Position_Spieler__Ohne_Bewegung() {
-		System.out.println(spieler.getPosition());
+	public void test_Position_Spieler__Mit_mehrfachen_Bewegungen_nach_Westen() {
+		// Given:
+		Random random = new Random();
+		int zufallszahlBisFuenfzehn = random.nextInt(15);
+
+		// When:
+		for (int i = 0; i < zufallszahlBisFuenfzehn; i++) {
+			spielerActual.nachWestenBewegen();
+		}
+
+		// Then:
+		assertEquals(spielerActual.getPosition(), new Point(1 - zufallszahlBisFuenfzehn, 0));
+	}
+
+	@Test
+	public void test_Position_Spieler__Mit_mehrfachen_Bewegungen_nach_Sueden_und_Osten() {
+		// Given:
+		Random random = new Random();
+		int zufallszahlBisFuenfzehn = random.nextInt(15);
+
+		// When:
+		for (int i = 0; i < zufallszahlBisFuenfzehn; i++) {
+			spielerActual.nachSüdenBewegen();
+			spielerActual.nachOstenBewegen();
+		}
+
+		// Then:
+		assertEquals(spielerActual.getPosition(), new Point(1 + zufallszahlBisFuenfzehn, 0 - zufallszahlBisFuenfzehn));
+	}
+
+	@Test
+	public void test_Position_Spieler__Mit_Raum_in_dem_Spiel_startet() {
+		// Given:
 		Spielfeld.initSpielfeld();
-		assertEquals(spieler.getPosition(), new Point(1, 0));
+
+		// When:
+		Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual);
+
+		// Then:
+		assertEquals("Marienplatz",
+				Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual).getName());
 	}
 
-	// TODO weitere Tests
+	@Test
+	public void test_Position_Spieler__Mit_Raum_in_den_sich_Spieler_bewegt() {
+		// Given:
+		Spielfeld.initSpielfeld();
+		spielerActual.setPosition(new Point(0, 0));
 
-	@Override
-	public String nachNordenBewegen() {
-		// TODO Auto-generated method stub
-		return null;
+		// When:
+		Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual);
+
+		// Then:
+		assertEquals("Stachus",
+				Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual).getName());
 	}
-
-	@Override
-	public String nachSüdenBewegen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String nachOstenBewegen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String nachWestenBewegen() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
