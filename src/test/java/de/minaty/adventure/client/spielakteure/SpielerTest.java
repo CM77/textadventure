@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.Point;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
@@ -18,18 +17,18 @@ class SpielerTest extends BewegungsTest {
 
 	// TODO Spieler hat als Point nur "null", nochmal Konstruktor und Vererbungen
 	// überprüfen
+	Point aktuellePosition = new Point(1, 0);
+	Spieler spieler = new Spieler(aktuellePosition, 30, 12, 10);
+
 	@BeforeAll
 	static void beforeFunction() {
-		Point aktuellePosition = new Point(1, 1);
-		Spieler spieler = new Spieler(aktuellePosition, 30, 12, 10);
-		System.out.println(spieler.getPosition());
 	}
 
 	@Test
-	@Disabled
-	public void test_Position_Spieler_Prüfen_Ohne_Bewegung() {
+	public void test_Position_Spieler__Ohne_Bewegung() {
+		System.out.println(spieler.getPosition());
 		Spielfeld.initSpielfeld();
-		assertEquals(new Point(1, 0).getX(), new Point(1, 0).getX());
+		assertEquals(spieler.getPosition(), new Point(1, 0));
 	}
 
 	// TODO weitere Tests

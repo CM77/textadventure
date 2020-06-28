@@ -8,6 +8,7 @@ public abstract class Spielobjekt {
 
 	protected Spielobjekt(Point position) {
 		super();
+		this.position = position;
 	}
 
 	public Point getPosition() {
