@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'application'
-  	id 'org.openjfx.javafxplugin' version '0.0.8'
+  	id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 
@@ -22,6 +22,6 @@ api 'com.google.guava:guava:23.0'
 
 //add
 javafx {
-    version = "14"
+    version = '14'
     modules = [ 'javafx.base',  'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
 }
