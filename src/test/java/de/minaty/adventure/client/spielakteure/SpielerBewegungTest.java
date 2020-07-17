@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
 
-class SpielerTest {
+class SpielerBewegungTest {
 
 	Point startPosition = new Point(1, 0);
 	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);

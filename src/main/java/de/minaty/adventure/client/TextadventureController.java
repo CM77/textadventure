@@ -45,11 +45,6 @@ public class TextadventureController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Spielfeld.initSpielfeld();
-
-//		raumButton.setOnAction(e -> {
-//			textAreaUnten.setText(Spielfeld.pruefePositionSpieler(spieler).getNameDesSpielobjekts());
-//			neuenButtonErzeugen();
-//		});
 		zeigeRaumUndBewegungsmöglichkeitenAn();
 	}
 
@@ -68,10 +63,6 @@ public class TextadventureController implements Initializable {
 		vboxOben.getChildren().addAll(buttonAuswahlAktion);
 		buttonAuswahlAktion.setMaxWidth(Double.MAX_VALUE);
 		VBox.setVgrow(buttonAuswahlAktion, Priority.ALWAYS);
-
-//TODO Methode entwickeln, die - angepasst auf die jeweiligen Ebene (Raum, Gegenstände, Rucksack), 
-		// in die der User geklickt hat - entsprechenden Aktionen als Buttons anzeigt
-
 	}
 
 	public Parent getRoot() {
