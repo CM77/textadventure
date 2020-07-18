@@ -2,6 +2,7 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,60 +17,56 @@ public class Spielfeld {
 
 	// TODO static weg?
 
-	private static HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
-	private static Point aktuelleSpielerPos;
-	private static List<Raum> aktuelleNachbarraeume = new ArrayList<Raum>();
+	private static HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
+	private static Point aktuelleSpielerPosition;
+	private static List<Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
 
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);
 	private static final Point KAPELLENSTRASSE = new Point(0, 1);
 	private static final Point KELLER = new Point(0, 2);
 
-	public static HashMap<Point, Raum> getMapMitRäumenInDerSpielwelt() {
-		return mapMitRäumenInDerSpielwelt;
+	public static HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
+		return mapAllerRaeumeInDerSpielwelt;
 	}
 
-	public static void setMapMitRäumenInDerSpielwelt(HashMap<Point, Raum> mapMitRäumenInDerSpielwelt) {
-		Spielfeld.mapMitRäumenInDerSpielwelt = mapMitRäumenInDerSpielwelt;
+	public static void setMapAllerRaeumeInDerSpielwelt(HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt) {
+		Spielfeld.mapAllerRaeumeInDerSpielwelt = mapAllerRaeumeInDerSpielwelt;
 	}
 
 	public static List<Raum> getAktuelleNachbarraeume() {
-		return aktuelleNachbarraeume;
+		return listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
 	}
 
-	public static void setAktuelleNachbarraeume(List<Raum> aktuelleNachbarraeume) {
-		Spielfeld.aktuelleNachbarraeume = aktuelleNachbarraeume;
+	public static void setAktuelleNachbarraeume(ArrayList<Raum> aktuelleNachbarraeume) {
+		Spielfeld.listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = aktuelleNachbarraeume;
 	}
 
 	public static void initSpielfeld() {
-		mapMitRäumenInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
-		mapMitRäumenInDerSpielwelt.put(KELLER, new Keller("Keller"));
-		mapMitRäumenInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
-		mapMitRäumenInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
+		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
+		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller("Keller"));
+		mapAllerRaeumeInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
+		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
 	public static Raum pruefeObPositionSpielerMitPositionRaumUebereinstimmt(Spieler spieler) {
-		aktuelleSpielerPos = spieler.getPosition();
-		for (HashMap.Entry<Point, Raum> entry : mapMitRäumenInDerSpielwelt.entrySet()) {
-			if (aktuelleSpielerPos.equals(entry.getKey())) {
+		aktuelleSpielerPosition = spieler.getPosition();
+		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
+			if (aktuelleSpielerPosition.equals(entry.getKey())) {
 				return entry.getValue();
 			}
 		}
 		return null; // TODO kann man das besser lösen?
 	}
 
-	public static List<Raum> ermittleAktuelleNachbarraeume(Spieler spieler) {
-		aktuelleSpielerPos = spieler.getPosition();
-		aktuelleNachbarraeume.clear();
-		for (HashMap.Entry<Point, Raum> entry : mapMitRäumenInDerSpielwelt.entrySet()) {
-			if (aktuelleSpielerPos.x == entry.getKey().x - 1 //
-					|| aktuelleSpielerPos.x == entry.getKey().x + 1 //
-					|| aktuelleSpielerPos.y == entry.getKey().y - 1 //
-					|| aktuelleSpielerPos.y == entry.getKey().y + 1 //
-			) {
-				aktuelleNachbarraeume.add(entry.getValue());
+	public static List<Raum> ermittleDieNachbarraeumeUmAktuellenAufenthaltsraum(Spieler spieler) {
+		aktuelleSpielerPosition = spieler.getPosition();
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.clear();
+		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
+			if (entry.getKey().distance(aktuelleSpielerPosition) == 1) {
+				listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.add(entry.getValue());
 			}
 		}
-		return aktuelleNachbarraeume;
+		return listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
 	}
 }
