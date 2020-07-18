@@ -18,7 +18,7 @@ public class Spielfeld {
 
 	private static HashMap<Point, Raum> mapMitRäumenInDerSpielwelt = new HashMap<>();
 	private static Point aktuelleSpielerPos;
-	private static List<Raum[]> aktuelleNachbarraeume = new ArrayList<Raum[]>();
+	private static List<Raum> aktuelleNachbarraeume = new ArrayList<Raum>();
 
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);
@@ -31,6 +31,14 @@ public class Spielfeld {
 
 	public static void setMapMitRäumenInDerSpielwelt(HashMap<Point, Raum> mapMitRäumenInDerSpielwelt) {
 		Spielfeld.mapMitRäumenInDerSpielwelt = mapMitRäumenInDerSpielwelt;
+	}
+
+	public static List<Raum> getAktuelleNachbarraeume() {
+		return aktuelleNachbarraeume;
+	}
+
+	public static void setAktuelleNachbarraeume(List<Raum> aktuelleNachbarraeume) {
+		Spielfeld.aktuelleNachbarraeume = aktuelleNachbarraeume;
 	}
 
 	public static void initSpielfeld() {
@@ -50,7 +58,7 @@ public class Spielfeld {
 		return null; // TODO kann man das besser lösen?
 	}
 
-	public static List<Raum[]> ermittleAktuelleNachbarraeume(Spieler spieler) {
+	public static List<Raum> ermittleAktuelleNachbarraeume(Spieler spieler) {
 		aktuelleSpielerPos = spieler.getPosition();
 		aktuelleNachbarraeume.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapMitRäumenInDerSpielwelt.entrySet()) {
@@ -59,7 +67,7 @@ public class Spielfeld {
 					|| aktuelleSpielerPos.y == entry.getKey().y - 1 //
 					|| aktuelleSpielerPos.y == entry.getKey().y + 1 //
 			) {
-				aktuelleNachbarraeume.add(new Raum[] { entry.getValue() });
+				aktuelleNachbarraeume.add(entry.getValue());
 			}
 		}
 		return aktuelleNachbarraeume;
