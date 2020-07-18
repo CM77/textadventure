@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'eclipse-wtp'
+    id 'eclipse'
     id 'application'
   	id 'org.openjfx.javafxplugin' version '0.0.8'
 }
@@ -17,6 +17,7 @@ dependencies {
 api 'com.google.guava:guava:23.0'
 
 testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+testImplementation 'org.hamcrest:hamcrest:2.2'
 testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
 }
 
