@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,12 +52,15 @@ public class TextadventureController implements Initializable {
 	private void zeigeRaumUndBewegungsmöglichkeitenAn() {
 		raumButton.setOnAction(e -> {
 			textAreaUnten.setText(Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler).getName());
-			neuenButtonErzeugen();
+			Spielfeld.ermittleDieNachbarraeumeUmAktuellenAufenthaltsraum(spieler);
+			for (Raum raum : Spielfeld.getAktuelleNachbarraeume()) {
+				neuenButtonErzeugen(raum.getName());
+				System.out.println(raum.getName());
+			}
 		});
 	}
 
-	private void neuenButtonErzeugen() {
-		String buttonBeschriftung = "";
+	private void neuenButtonErzeugen(String buttonBeschriftung) {
 		Button buttonAuswahlAktion = new Button(buttonBeschriftung);
 		buttonAuswahlAktion.getStyleClass().add("buttonAuswahlAktion");
 		buttonAuswahlAktion.setAlignment(Pos.BASELINE_LEFT);
