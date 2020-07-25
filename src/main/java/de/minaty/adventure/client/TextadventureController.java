@@ -39,6 +39,8 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private TextArea textAreaUnten;
 
+	private boolean raumButtonBereitsErzeugt = false;
+
 	// TODO Methode für individuellen Spielernamen und Zufallszahl bei Stärke,
 	// Attacke und Parade
 	Spieler spieler = new Spieler(new Point(1, 0), 30, 10, 10);
@@ -46,16 +48,29 @@ public class TextadventureController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Spielfeld.initSpielfeld();
-		zeigeRaumUndBewegungsmöglichkeitenAn();
+		zeigeAufenthaltsraum();
+		zeigeZugmoeglichtenInNachbarraeume();
 	}
 
-	private void zeigeRaumUndBewegungsmöglichkeitenAn() {
+	private void zeigeAufenthaltsraum() {
+		textAreaUnten.setText(Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler).getName());
+		textAreaUnten.appendText("\n");
+		textAreaUnten.appendText("\n");
+		// TODO "im Raum" durch ne Art Status Formatter allgemeiner halten"
+		textAreaUnten.appendText("Du bist im Raum "
+				+ Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler).getName() + ".");
+	}
+
+	private void zeigeZugmoeglichtenInNachbarraeume() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spieler).getName());
 			Spielfeld.ermittleDieNachbarraeumeUmAktuellenAufenthaltsraum(spieler);
-			for (Raum raum : Spielfeld.getAktuelleNachbarraeume()) {
-				neuenButtonErzeugen(raum.getName());
-				System.out.println(raum.getName());
+			if (raumButtonBereitsErzeugt) {
+				zeigeAufenthaltsraum();
+			} else {
+				for (Raum raum : Spielfeld.getAktuelleNachbarraeume()) {
+					neuenButtonErzeugen(raum.getName());
+				}
+				raumButtonBereitsErzeugt = true;
 			}
 		});
 	}

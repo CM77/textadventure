@@ -49,6 +49,7 @@ public class Spielfeld {
 		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
+	// TODO ähnlich wie NachbarraumListe aktuellen Raum in ArrayList speichern
 	public static Raum pruefeObPositionSpielerMitPositionRaumUebereinstimmt(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
