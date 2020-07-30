@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.Point;
 import java.util.Random;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
@@ -62,11 +63,10 @@ class SpielerBewegungTest {
 		Spielfeld.initSpielfeld();
 
 		// When:
-		Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual);
+		Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Marienplatz",
-				Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual).getName());
+		assertEquals("Marienplatz", Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
 	@Test
@@ -76,10 +76,22 @@ class SpielerBewegungTest {
 		spielerActual.setPosition(new Point(0, 0));
 
 		// When:
-		Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual);
+		Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Stachus",
-				Spielfeld.pruefeObPositionSpielerMitPositionRaumUebereinstimmt(spielerActual).getName());
+		assertEquals("Stachus", Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual).getName());
+	}
+
+	@Test
+	@Disabled
+	public void test_Position_Spieler__Ausserhalb_der_Spielwelt() {
+		// Given:
+		Spielfeld.initSpielfeld();
+		spielerActual.setPosition(new Point(0, 0));
+
+		// When:
+		spielerActual.nachSuedenBewegen();
+
+		// Then:
 	}
 }

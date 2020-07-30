@@ -1,10 +1,7 @@
 package de.minaty.adventure.client;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import de.minaty.adventure.client.raeume.Kapellenstraße;
 import de.minaty.adventure.client.raeume.Keller;
@@ -17,9 +14,10 @@ public class Spielfeld {
 
 	// TODO static weg?
 
-	private static HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
 	private static Point aktuelleSpielerPosition;
-	private static List<Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
+	private static HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
+	private static HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
+	private static HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
 
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);
@@ -34,12 +32,21 @@ public class Spielfeld {
 		Spielfeld.mapAllerRaeumeInDerSpielwelt = mapAllerRaeumeInDerSpielwelt;
 	}
 
-	public static List<Raum> getAktuelleNachbarraeume() {
-		return listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
+	public static HashMap<Point, Raum> getMapMitNachbarraeumen() {
+		return mapAllerAktuellenNachbarraeume;
 	}
 
-	public static void setAktuelleNachbarraeume(ArrayList<Raum> aktuelleNachbarraeume) {
-		Spielfeld.listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = aktuelleNachbarraeume;
+	public static void setMapMitNachbarraeumen(
+			HashMap<Point, Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums) {
+		Spielfeld.mapAllerAktuellenNachbarraeume = listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
+	}
+
+	public static HashMap<Raum, Himmelsrichtung> getMapMitHimmelsrichtungen() {
+		return mapMoeglicherHimmelsrichtungen;
+	}
+
+	public static void setMapMitHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
+		Spielfeld.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
 	}
 
 	public static void initSpielfeld() {
@@ -49,25 +56,44 @@ public class Spielfeld {
 		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
-	// TODO ähnlich wie NachbarraumListe aktuellen Raum in ArrayList speichern
-	public static Raum pruefeObPositionSpielerMitPositionRaumUebereinstimmt(Spieler spieler) {
+	public static Raum pruefeAufenthaltsraumSpieler(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
+		Raum aufenthaltsraumSpieler = null;
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
 			if (aktuelleSpielerPosition.equals(entry.getKey())) {
-				return entry.getValue();
+				aufenthaltsraumSpieler = entry.getValue();
 			}
 		}
-		return null; // TODO kann man das besser lösen?
+		return aufenthaltsraumSpieler;
 	}
 
-	public static List<Raum> ermittleDieNachbarraeumeUmAktuellenAufenthaltsraum(Spieler spieler) {
+	public static HashMap<Point, Raum> ermittleDieNachbarraeume(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.clear();
+		mapAllerAktuellenNachbarraeume.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
 			if (entry.getKey().distance(aktuelleSpielerPosition) == 1) {
-				listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.add(entry.getValue());
+				mapAllerAktuellenNachbarraeume.put(entry.getKey(), entry.getValue());
 			}
 		}
-		return listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
+		return mapAllerAktuellenNachbarraeume;
+	}
+
+	public static void ermittleMoeglicheHimmelsrichtungen(Spieler spieler) {
+		aktuelleSpielerPosition = spieler.getPosition();
+		mapMoeglicherHimmelsrichtungen.clear();
+		for (HashMap.Entry<Point, Raum> entry : mapAllerAktuellenNachbarraeume.entrySet()) {
+			if (entry.getKey().y == aktuelleSpielerPosition.y + 1) {
+				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.NORDEN);
+			}
+			if (entry.getKey().y == aktuelleSpielerPosition.y - 1) {
+				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.SUEDEN);
+			}
+			if (entry.getKey().x == aktuelleSpielerPosition.x + 1) {
+				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.OSTEN);
+			}
+			if (entry.getKey().x == aktuelleSpielerPosition.x - 1) {
+				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.WESTEN);
+			}
+		}
 	}
 }
