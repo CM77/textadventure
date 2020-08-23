@@ -43,6 +43,10 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private TextArea textAreaUnten;
 
+	// TODO Factory Klasse für Button-Erzeugung bauen
+
+	// TODO erkunden Button einbauen
+
 	private Button nordButton = new Button("nach Norden gehen");
 	private Button suedButton = new Button("nach Süden gehen");
 	private Button ostButton = new Button("nach Osten gehen");
