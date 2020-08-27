@@ -51,7 +51,8 @@ public class TextadventureController implements Initializable {
 	private Button suedButton = new Button("nach Süden gehen");
 	private Button ostButton = new Button("nach Osten gehen");
 	private Button westButton = new Button("nach Westen gehen");
-	private List<Button> listeMitHimmelsrichtungButtons = new ArrayList<>(Arrays.asList());
+	private Button erkundungsButton = new Button();
+	private List<Button> listeMitRaumAktionsButtons = new ArrayList<>(Arrays.asList());
 
 	Spieler spieler = new Spieler(new Point(1, 0), 30, 10, 10);
 
@@ -59,16 +60,6 @@ public class TextadventureController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Spielfeld.initSpielfeld();
 		zeigeAufenthaltsraum();
-	}
-
-	private void starteZugLogik() {
-		vboxOben.getChildren().clear();
-		listeMitHimmelsrichtungButtons.clear();
-		Spielfeld.ermittleDieNachbarraeume(spieler);
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
-		fuegeZugbuttonsInListe();
-		himmelsrichtungButtonsAuflisten();
-		himmelsrichtungButtonsFuerBewegungsAktionScharfschalten();
 	}
 
 	private void zeigeAufenthaltsraum() {
@@ -79,28 +70,66 @@ public class TextadventureController implements Initializable {
 			textAreaUnten
 					.appendText("Du bist im Raum " + Spielfeld.pruefeAufenthaltsraumSpieler(spieler).getName() + ".");
 			starteZugLogik();
+			starteErkundungsLogik();
 		});
+	}
+
+	private void starteZugLogik() {
+		vboxOben.getChildren().clear();
+		listeMitRaumAktionsButtons.clear();
+		Spielfeld.ermittleDieNachbarraeume(spieler);
+		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
+		fuegeZugbuttonsInListe();
+		himmelsrichtungButtonsAuflisten();
+		himmelsrichtungButtonsFuerBewegungsAktionScharfschalten();
+	}
+
+	private void starteErkundungsLogik() {
+		listeMitRaumAktionsButtons.add(erkundenButtonBauen());
+		erkundungsButtonAuflisten();
+		erkundungsButtonScharfschalten();
+	}
+
+	private Button erkundenButtonBauen() {
+		return Spielfeld.pruefeAufenthaltsraumSpieler(spieler).baueButton();
+	}
+
+	private void erkundungsButtonAuflisten() {
+		erkundungsButton = listeMitRaumAktionsButtons.get(listeMitRaumAktionsButtons.size() - 1);
+		erkundungsButton.getStyleClass().add("buttonAuswahlAktion");
+		erkundungsButton.setAlignment(Pos.BASELINE_LEFT);
+		vboxOben.getChildren().addAll(erkundungsButton);
+		erkundungsButton.setMaxWidth(Double.MAX_VALUE);
+		VBox.setVgrow(erkundungsButton, Priority.ALWAYS);
+	}
+
+	private void erkundungsButtonScharfschalten() {
+		erkundungsButton.setOnAction(e -> {
+			textAreaUnten.appendText("\n");
+			textAreaUnten.appendText(Spielfeld.pruefeAufenthaltsraumSpieler(spieler).erkunden());
+		});
+
 	}
 
 	private void fuegeZugbuttonsInListe() {
 		for (Entry<Raum, Himmelsrichtung> entry : Spielfeld.getMapMitHimmelsrichtungen().entrySet()) {
 			if (nordButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitHimmelsrichtungButtons.add(nordButton);
+				listeMitRaumAktionsButtons.add(nordButton);
 			}
 			if (suedButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitHimmelsrichtungButtons.add(suedButton);
+				listeMitRaumAktionsButtons.add(suedButton);
 			}
 			if (ostButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitHimmelsrichtungButtons.add(ostButton);
+				listeMitRaumAktionsButtons.add(ostButton);
 			}
 			if (westButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitHimmelsrichtungButtons.add(westButton);
+				listeMitRaumAktionsButtons.add(westButton);
 			}
 		}
 	}
 
 	private void himmelsrichtungButtonsAuflisten() {
-		for (Button button : listeMitHimmelsrichtungButtons) {
+		for (Button button : listeMitRaumAktionsButtons) {
 			button.getStyleClass().add("buttonAuswahlAktion");
 			button.setAlignment(Pos.BASELINE_LEFT);
 			vboxOben.getChildren().addAll(button);

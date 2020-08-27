@@ -8,6 +8,7 @@ import de.minaty.adventure.client.raeume.Keller;
 import de.minaty.adventure.client.raeume.Marienplatz;
 import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.raeume.Stachus;
+import de.minaty.adventure.client.raeume.Wendeltreppe;
 import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
@@ -22,7 +23,8 @@ public class Spielfeld {
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);
 	private static final Point KAPELLENSTRASSE = new Point(0, 1);
-	private static final Point KELLER = new Point(0, 2);
+	private static final Point WENDELTREPPE = new Point(0, 2);
+	private static final Point KELLER = new Point(0, 3);
 
 	public static HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
 		return mapAllerRaeumeInDerSpielwelt;
@@ -53,6 +55,7 @@ public class Spielfeld {
 		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
 		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller("Keller"));
 		mapAllerRaeumeInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
+		mapAllerRaeumeInDerSpielwelt.put(WENDELTREPPE, new Wendeltreppe("Wendeltreppe"));
 		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
