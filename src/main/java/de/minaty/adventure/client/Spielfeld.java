@@ -59,7 +59,7 @@ public class Spielfeld {
 		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
-	public static Raum pruefeAufenthaltsraumSpieler(Spieler spieler) {
+	public static Raum ermittleAufenthaltsraumSpieler(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
 		Raum aufenthaltsraumSpieler = null;
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {

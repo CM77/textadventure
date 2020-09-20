@@ -1,6 +1,6 @@
 package de.minaty.adventure.client.raeume;
 
-public abstract class Raum implements Erkundbar, klickbareAktionen {
+public abstract class Raum implements Erkundbar {
 
 	private String name;
 
@@ -16,5 +16,4 @@ public abstract class Raum implements Erkundbar, klickbareAktionen {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }

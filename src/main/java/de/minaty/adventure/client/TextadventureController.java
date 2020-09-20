@@ -43,10 +43,6 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private TextArea textAreaUnten;
 
-	// TODO Factory Klasse für Button-Erzeugung bauen
-
-	// TODO erkunden Button einbauen
-
 	private Button nordButton = new Button("nach Norden gehen");
 	private Button suedButton = new Button("nach Süden gehen");
 	private Button ostButton = new Button("nach Osten gehen");
@@ -59,16 +55,16 @@ public class TextadventureController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Spielfeld.initSpielfeld();
-		zeigeAufenthaltsraum();
+		zeigeAufenthaltsraumAktionen();
 	}
 
-	private void zeigeAufenthaltsraum() {
+	private void zeigeAufenthaltsraumAktionen() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(Spielfeld.pruefeAufenthaltsraumSpieler(spieler).getName());
+			textAreaUnten.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
 			textAreaUnten.appendText("\n");
 			textAreaUnten.appendText("\n");
 			textAreaUnten
-					.appendText("Du bist im Raum " + Spielfeld.pruefeAufenthaltsraumSpieler(spieler).getName() + ".");
+					.appendText("Du bist im Raum " + Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
 			starteZugLogik();
 			starteErkundungsLogik();
 		});
@@ -81,34 +77,13 @@ public class TextadventureController implements Initializable {
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
 		fuegeZugbuttonsInListe();
 		himmelsrichtungButtonsAuflisten();
-		himmelsrichtungButtonsFuerBewegungsAktionScharfschalten();
+		himmelsrichtungButtonsAktivieren();
 	}
 
 	private void starteErkundungsLogik() {
-		listeMitRaumAktionsButtons.add(erkundenButtonBauen());
-		erkundungsButtonAuflisten();
-		erkundungsButtonScharfschalten();
-	}
-
-	private Button erkundenButtonBauen() {
-		return Spielfeld.pruefeAufenthaltsraumSpieler(spieler).baueButton();
-	}
-
-	private void erkundungsButtonAuflisten() {
-		erkundungsButton = listeMitRaumAktionsButtons.get(listeMitRaumAktionsButtons.size() - 1);
-		erkundungsButton.getStyleClass().add("buttonAuswahlAktion");
-		erkundungsButton.setAlignment(Pos.BASELINE_LEFT);
-		vboxOben.getChildren().addAll(erkundungsButton);
-		erkundungsButton.setMaxWidth(Double.MAX_VALUE);
-		VBox.setVgrow(erkundungsButton, Priority.ALWAYS);
-	}
-
-	private void erkundungsButtonScharfschalten() {
-		erkundungsButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(Spielfeld.pruefeAufenthaltsraumSpieler(spieler).erkunden());
-		});
-
+		erkundungsButton.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " erkunden");
+		buttonMitStyleVersehenUndEinhaengen(erkundungsButton);
+		erkundungsButtonAktivieren();
 	}
 
 	private void fuegeZugbuttonsInListe() {
@@ -130,15 +105,11 @@ public class TextadventureController implements Initializable {
 
 	private void himmelsrichtungButtonsAuflisten() {
 		for (Button button : listeMitRaumAktionsButtons) {
-			button.getStyleClass().add("buttonAuswahlAktion");
-			button.setAlignment(Pos.BASELINE_LEFT);
-			vboxOben.getChildren().addAll(button);
-			button.setMaxWidth(Double.MAX_VALUE);
-			VBox.setVgrow(button, Priority.ALWAYS);
+			buttonMitStyleVersehenUndEinhaengen(button);
 		}
 	}
 
-	private void himmelsrichtungButtonsFuerBewegungsAktionScharfschalten() {
+	private void himmelsrichtungButtonsAktivieren() {
 		nordButton.setOnAction(e -> {
 			textAreaUnten.appendText("\n");
 			textAreaUnten.appendText(spieler.nachNordenBewegen());
@@ -155,6 +126,21 @@ public class TextadventureController implements Initializable {
 			textAreaUnten.appendText("\n");
 			textAreaUnten.appendText(spieler.nachWestenBewegen());
 		});
+	}
+
+	private void erkundungsButtonAktivieren() {
+		erkundungsButton.setOnAction(e -> {
+			textAreaUnten.appendText("\n");
+			textAreaUnten.appendText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
+		});
+	}
+
+	private void buttonMitStyleVersehenUndEinhaengen(Button button) {
+		button.getStyleClass().add("buttonAuswahlAktion");
+		button.setAlignment(Pos.BASELINE_LEFT);
+		vboxOben.getChildren().addAll(button);
+		button.setMaxWidth(Double.MAX_VALUE);
+		VBox.setVgrow(button, Priority.ALWAYS);
 	}
 
 	public Parent getRoot() {

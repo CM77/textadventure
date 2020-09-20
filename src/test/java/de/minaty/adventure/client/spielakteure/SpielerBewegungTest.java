@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
 
-class SpielerBewegungTest {
+public class SpielerBewegungTest {
 
 	Point startPosition = new Point(1, 0);
 	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);
@@ -63,10 +63,10 @@ class SpielerBewegungTest {
 		Spielfeld.initSpielfeld();
 
 		// When:
-		Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual);
+		Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Marienplatz", Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual).getName());
+		assertEquals("Marienplatz", Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
 	@Test
@@ -76,10 +76,10 @@ class SpielerBewegungTest {
 		spielerActual.setPosition(new Point(0, 0));
 
 		// When:
-		Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual);
+		Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Stachus", Spielfeld.pruefeAufenthaltsraumSpieler(spielerActual).getName());
+		assertEquals("Stachus", Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
 	@Test

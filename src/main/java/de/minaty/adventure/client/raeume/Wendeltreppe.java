@@ -1,8 +1,5 @@
 package de.minaty.adventure.client.raeume;
 
-import de.minaty.adventure.client.ButtonFabrik;
-import javafx.scene.control.Button;
-
 public final class Wendeltreppe extends Raum {
 
 	public Wendeltreppe(String nameDesSpielobjekts) {
@@ -15,8 +12,4 @@ public final class Wendeltreppe extends Raum {
 				+ "Fackeln säumen die aus grobem Stein gehauenen Wände. ";
 	}
 
-	@Override
-	public Button baueButton() {
-		return ButtonFabrik.erzeugeButton(getName() + " erkunden");
-	}
 }

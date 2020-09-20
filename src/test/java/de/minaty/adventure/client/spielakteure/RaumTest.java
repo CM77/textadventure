@@ -15,7 +15,7 @@ import de.minaty.adventure.client.Himmelsrichtung;
 import de.minaty.adventure.client.Spielfeld;
 import de.minaty.adventure.client.raeume.Raum;
 
-class RaumTest {
+public class RaumTest {
 
 	private List<Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
 	private List<Himmelsrichtung> listeMitDenExitsDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
@@ -36,8 +36,7 @@ class RaumTest {
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums
-				.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).hasSize(1);
@@ -52,8 +51,7 @@ class RaumTest {
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums
-				.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).hasSize(2);
@@ -68,8 +66,7 @@ class RaumTest {
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums
-				.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.SUEDEN);
@@ -85,8 +82,7 @@ class RaumTest {
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums
-				.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.WESTEN);
@@ -101,8 +97,7 @@ class RaumTest {
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
 		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums
-				.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.OSTEN);
