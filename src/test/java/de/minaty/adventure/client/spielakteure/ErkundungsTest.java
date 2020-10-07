@@ -16,7 +16,7 @@ public class ErkundungsTest {
 	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);
 
 	@Test
-	public void test_Position_Spieler__Erkundung_eines_Raums() {
+	public void test_Position_Spieler__Erkundung_vom_Raum_Stachus() {
 		// Given:
 		Stachus stachus = new Stachus("Stachus");
 		String stachusErkundungstext = stachus.erkunden();

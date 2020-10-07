@@ -4,11 +4,11 @@ import java.awt.Point;
 
 import de.minaty.adventure.client.spielakteure.Spielobjekt;
 
-public abstract class Gegenstand extends Spielobjekt implements Untersuchbar {
+public abstract class Gegenstand extends Spielobjekt implements Untersuchbar, Versteckbar {
 
 	private int gewicht;
 
-	Gegenstand(Point position, int gewicht) {
+	protected Gegenstand(Point position, int gewicht) {
 		super(position);
 		this.gewicht = gewicht;
 	}
