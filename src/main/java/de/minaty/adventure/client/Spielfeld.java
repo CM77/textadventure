@@ -2,7 +2,12 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
+import de.minaty.adventure.client.gegenstaende.Gegenstand;
+import de.minaty.adventure.client.gegenstaende.alltagsgegenstaende.Apfel;
+import de.minaty.adventure.client.gegenstaende.waffen.Samuraischwert;
 import de.minaty.adventure.client.raeume.Kapellenstraße;
 import de.minaty.adventure.client.raeume.Keller;
 import de.minaty.adventure.client.raeume.Marienplatz;
@@ -13,18 +18,19 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
 
-	// TODO static weg?
-
 	private static Point aktuelleSpielerPosition;
 	private static HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
 	private static HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
 	private static HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
+	private static Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
 
 	private static final Point MARIENPLATZ = new Point(1, 0);
 	private static final Point STACHUS = new Point(0, 0);
 	private static final Point KAPELLENSTRASSE = new Point(0, 1);
 	private static final Point WENDELTREPPE = new Point(0, 2);
 	private static final Point KELLER = new Point(0, 3);
+
+	// TODO static überall weg?
 
 	public static HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
 		return mapAllerRaeumeInDerSpielwelt;
@@ -49,6 +55,14 @@ public class Spielfeld {
 
 	public static void setMapMitHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
 		Spielfeld.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
+	}
+
+	public static Set<Gegenstand> getSetMitAllenGegenstaenden() {
+		return setMitAllenGegenstaenden;
+	}
+
+	public static void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
+		Spielfeld.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
 	}
 
 	public static void initSpielfeld() {
@@ -98,5 +112,10 @@ public class Spielfeld {
 				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.WESTEN);
 			}
 		}
+	}
+
+	public static void initGegenstaende() {
+		setMitAllenGegenstaenden.add(new Samuraischwert(STACHUS, 2, 10));
+		setMitAllenGegenstaenden.add(new Apfel(KELLER, 1));
 	}
 }

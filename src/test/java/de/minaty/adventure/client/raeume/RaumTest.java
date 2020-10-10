@@ -1,4 +1,4 @@
-package de.minaty.adventure.client.spielakteure;
+package de.minaty.adventure.client.raeume;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import de.minaty.adventure.client.Himmelsrichtung;
 import de.minaty.adventure.client.Spielfeld;
 import de.minaty.adventure.client.raeume.Raum;
+import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class RaumTest {
 

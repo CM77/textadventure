@@ -1,4 +1,4 @@
-package de.minaty.adventure.client.spielakteure;
+package de.minaty.adventure.client.raeume;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,8 +7,7 @@ import java.awt.Point;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
-import de.minaty.adventure.client.raeume.Raum;
-import de.minaty.adventure.client.raeume.Stachus;
+import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class ErkundungsTest {
 
