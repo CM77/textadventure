@@ -8,8 +8,8 @@ public abstract class Spielfigur extends Spielobjekt implements Anschaubar {
 	private int attacke;
 	private int parade;
 
-	Spielfigur(Point position, int staerke, int attacke, int parade) {
-		super(position);
+	Spielfigur(Point position, String name, int staerke, int attacke, int parade) {
+		super(position, name);
 		this.staerke = staerke;
 		this.attacke = attacke;
 		this.parade = parade;

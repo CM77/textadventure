@@ -12,7 +12,7 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 public class ErkundungsTest {
 
 	Point startPosition = new Point(0, 0);
-	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);
+	Spieler spielerActual = new Spieler(startPosition, "spieler", 30, 12, 10);
 
 	@Test
 	public void test_Position_Spieler__Erkundung_vom_Raum_Stachus() {

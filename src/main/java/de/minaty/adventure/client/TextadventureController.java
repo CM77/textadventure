@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
+import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
 import javafx.fxml.FXML;
@@ -49,13 +50,19 @@ public class TextadventureController implements Initializable {
 	private Button westButton = new Button("nach Westen gehen");
 	private Button erkundungsButton = new Button();
 	private List<Button> listeMitRaumAktionsButtons = new ArrayList<>(Arrays.asList());
+	private List<Button> listeMitGegenstandAktionsButtons = new ArrayList<>(Arrays.asList());
 
-	Spieler spieler = new Spieler(new Point(1, 0), 30, 10, 10);
+	Spieler spieler = new Spieler(new Point(1, 0), "spieler", 30, 10, 10);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Spielfeld.initSpielfeld();
 		zeigeAufenthaltsraumAktionen();
+
+		// TODO Logik entwickeln, dass nur Gegenstände im spezifischen Raum angezeigt
+		// werden und nicht wie jetzt in jedem Raum
+		Spielfeld.initGegenstaende();
+		zeigeGegenstandButtonAktionen();
 	}
 
 	private void zeigeAufenthaltsraumAktionen() {
@@ -141,6 +148,32 @@ public class TextadventureController implements Initializable {
 		vboxOben.getChildren().addAll(button);
 		button.setMaxWidth(Double.MAX_VALUE);
 		VBox.setVgrow(button, Priority.ALWAYS);
+	}
+
+	private void fuegeGegenstandbuttonsInListe() {
+		for (Gegenstand g : Spielfeld.getSetMitAllenGegenstaenden()) {
+			listeMitGegenstandAktionsButtons.add(new Button(g.getName()));
+		}
+	}
+
+	private void gegenstandButtonsAuflisten() {
+		for (Button button : listeMitGegenstandAktionsButtons) {
+			buttonMitStyleVersehenUndEinhaengen(button);
+		}
+	}
+
+	private void zeigeGegenstandButtonAktionen() {
+		gegenstaendeButton.setOnAction(e -> {
+			listeMitGegenstandAktionsButtons.clear();
+			textAreaUnten.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+			textAreaUnten.appendText("\n");
+			textAreaUnten.appendText("\n");
+			textAreaUnten
+					.appendText("Du bist im Raum " + Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
+			vboxOben.getChildren().clear();
+			fuegeGegenstandbuttonsInListe();
+			gegenstandButtonsAuflisten();
+		});
 	}
 
 	public Parent getRoot() {

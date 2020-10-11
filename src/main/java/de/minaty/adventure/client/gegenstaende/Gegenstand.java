@@ -8,8 +8,8 @@ public abstract class Gegenstand extends Spielobjekt implements Untersuchbar, Ve
 
 	private int gewicht;
 
-	protected Gegenstand(Point position, int gewicht) {
-		super(position);
+	protected Gegenstand(Point position, String name, int gewicht) {
+		super(position, name);
 		this.gewicht = gewicht;
 	}
 

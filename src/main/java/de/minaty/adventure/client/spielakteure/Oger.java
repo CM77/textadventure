@@ -4,8 +4,8 @@ import java.awt.Point;
 
 public final class Oger extends Monster {
 
-	public Oger(Point position, int staerke, int attacke, int parade) {
-		super(position, staerke, attacke, parade);
+	public Oger(Point position, String name, int staerke, int attacke, int parade) {
+		super(position, name, staerke, attacke, parade);
 	}
 
 	@Override

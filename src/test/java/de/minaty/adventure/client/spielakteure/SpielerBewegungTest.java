@@ -13,7 +13,7 @@ import de.minaty.adventure.client.Spielfeld;
 public class SpielerBewegungTest {
 
 	Point startPosition = new Point(1, 0);
-	Spieler spielerActual = new Spieler(startPosition, 30, 12, 10);
+	Spieler spielerActual = new Spieler(startPosition, "spieler", 30, 12, 10);
 
 	@Test
 	public void test_Position_Spieler__Mit_einfacher_Bewegung_nach_Norden() {

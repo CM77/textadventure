@@ -5,10 +5,12 @@ import java.awt.Point;
 public abstract class Spielobjekt {
 
 	protected Point position;
+	protected String name;
 
-	protected Spielobjekt(Point position) {
+	protected Spielobjekt(Point position, String name) {
 		super();
 		this.position = position;
+		this.setName(name);
 	}
 
 	public Point getPosition() {
@@ -19,4 +21,11 @@ public abstract class Spielobjekt {
 		this.position = position;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

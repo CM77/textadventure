@@ -115,7 +115,7 @@ public class Spielfeld {
 	}
 
 	public static void initGegenstaende() {
-		setMitAllenGegenstaenden.add(new Samuraischwert(STACHUS, 2, 10));
-		setMitAllenGegenstaenden.add(new Apfel(KELLER, 1));
+		setMitAllenGegenstaenden.add(new Samuraischwert(STACHUS, "Samuraischwert", 2, 10));
+		setMitAllenGegenstaenden.add(new Apfel(KELLER, "Apfel", 1));
 	}
 }

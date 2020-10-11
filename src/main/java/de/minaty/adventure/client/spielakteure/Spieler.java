@@ -6,8 +6,8 @@ public final class Spieler extends Spielfigur implements Bewegbar {
 
 	// TODO Interface Waffe für Spieler und Monster
 
-	public Spieler(Point position, int staerke, int attacke, int parade) {
-		super(position, staerke, attacke, parade);
+	public Spieler(Point position, String name, int staerke, int attacke, int parade) {
+		super(position, name, staerke, attacke, parade);
 	}
 
 	@Override

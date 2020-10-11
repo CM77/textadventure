@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Himmelsrichtung;
 import de.minaty.adventure.client.Spielfeld;
-import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class RaumTest {
@@ -31,7 +30,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Anzahl_der_Zugmoeglichkeiten_vom_Aufenthaltsraum_Marienplatz() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(1, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -46,7 +45,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Anzahl_der_Zugmoeglichkeiten_vom_Aufenthaltsraum_Stachus() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -61,7 +60,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Name_der_Exit_Himmelsrichtungen_vom_Aufenthaltsraum_Kapellenstrasse() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 1), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -77,7 +76,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Name_der_Exit_Himmelsrichtungen_vom_Aufenthaltsraum_Marienplatz() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(1, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -92,7 +91,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Name_der_Exit_Himmelsrichtungen_vom_Aufenthaltsraum_Stachus() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -108,7 +107,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Anzahl_der_Nachbarraeume_vom_Aufenthaltsraum_Marienplatz() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(1, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -121,7 +120,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Anzahl_der_Nachbarraeume_vom_Aufenthaltsraum_Stachus_ermitteln() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 0), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);
@@ -134,7 +133,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Name_des_Nachbarraums_vom_Aufenthaltsraum_Keller_abgleichen() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 2), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 2), "spieler", 30, 12, 10);
 		String zuFilternderNachbarraumName = null;
 
 		// When:
@@ -153,7 +152,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Ein_Name_von_insgesamt_zwei_Nachbarraeumen_vom_Aufenthaltsraum_Kapellenstraße_abgleichen() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 1), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
 		Raum filteredRaum = null;
 
 		// When:
@@ -170,7 +169,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Zwei_von_zwei_Nachbarraeumen_vom_Aufenthaltsraum_Kapellenstraße_abgleichen() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 1), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
 		boolean alleNachbarraeumeSindPraesent;
 
 		// When:
@@ -187,7 +186,7 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Wenn_es_keine_Nachbarraeume_gibt() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(27, 17), 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(27, 17), "spieler", 30, 12, 10);
 
 		// When:
 		Spielfeld.ermittleDieNachbarraeume(spielerActual);

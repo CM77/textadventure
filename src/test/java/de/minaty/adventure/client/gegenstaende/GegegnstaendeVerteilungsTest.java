@@ -13,7 +13,7 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 public class GegegnstaendeVerteilungsTest {
 
 	Point stachus = new Point(0, 0);
-	Spieler spielerActual = new Spieler(stachus, 30, 12, 10);
+	Spieler spielerActual = new Spieler(stachus, "Spieler", 30, 12, 10);
 
 	@Test
 	public void test_Position__Gegenstaende_Stachus() {
@@ -37,7 +37,7 @@ public class GegegnstaendeVerteilungsTest {
 	public void test_Position__verschiebe_Gegenstaende_vom_Stachus_in_Keller() {
 		// Given:
 		Spielfeld.initSpielfeld();
-		Samuraischwert s = new Samuraischwert(stachus, 1, 3);
+		Samuraischwert s = new Samuraischwert(stachus, "schwert", 1, 3);
 		s.setPosition(new Point(0, 3));
 		int anzahlGegenstaendeAufDemStachus = 0;
 
