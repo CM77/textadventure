@@ -18,54 +18,59 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
 
-	private static Point aktuelleSpielerPosition;
-	private static HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
-	private static HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
-	private static HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
-	private static Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
+	private Point aktuelleSpielerPosition;
+	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
+	private HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
+	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
+	private Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
 
-	private static final Point MARIENPLATZ = new Point(1, 0);
-	private static final Point STACHUS = new Point(0, 0);
-	private static final Point KAPELLENSTRASSE = new Point(0, 1);
-	private static final Point WENDELTREPPE = new Point(0, 2);
-	private static final Point KELLER = new Point(0, 3);
+	private final Point MARIENPLATZ = new Point(1, 0);
+	private final Point STACHUS = new Point(0, 0);
+	private final Point KAPELLENSTRASSE = new Point(0, 1);
+	private final Point WENDELTREPPE = new Point(0, 2);
+	private final Point KELLER = new Point(0, 3);
 
-	// TODO static überall weg?
+	public Point getAktuelleSpielerPosition() {
+		return aktuelleSpielerPosition;
+	}
 
-	public static HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
+	public void setAktuelleSpielerPosition(Point aktuelleSpielerPosition) {
+		this.aktuelleSpielerPosition = aktuelleSpielerPosition;
+	}
+
+	public HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
 		return mapAllerRaeumeInDerSpielwelt;
 	}
 
-	public static void setMapAllerRaeumeInDerSpielwelt(HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt) {
-		Spielfeld.mapAllerRaeumeInDerSpielwelt = mapAllerRaeumeInDerSpielwelt;
+	public void setMapAllerRaeumeInDerSpielwelt(HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt) {
+		this.mapAllerRaeumeInDerSpielwelt = mapAllerRaeumeInDerSpielwelt;
 	}
 
-	public static HashMap<Point, Raum> getMapMitNachbarraeumen() {
+	public HashMap<Point, Raum> getMapAllerAktuellenNachbarraeume() {
 		return mapAllerAktuellenNachbarraeume;
 	}
 
-	public static void setMapMitNachbarraeumen(
-			HashMap<Point, Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums) {
-		Spielfeld.mapAllerAktuellenNachbarraeume = listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums;
+	public void setMapAllerAktuellenNachbarraeume(HashMap<Point, Raum> mapAllerAktuellenNachbarraeume) {
+		this.mapAllerAktuellenNachbarraeume = mapAllerAktuellenNachbarraeume;
 	}
 
-	public static HashMap<Raum, Himmelsrichtung> getMapMitHimmelsrichtungen() {
+	public HashMap<Raum, Himmelsrichtung> getMapMoeglicherHimmelsrichtungen() {
 		return mapMoeglicherHimmelsrichtungen;
 	}
 
-	public static void setMapMitHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
-		Spielfeld.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
+	public void setMapMoeglicherHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
+		this.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
 	}
 
-	public static Set<Gegenstand> getSetMitAllenGegenstaenden() {
+	public Set<Gegenstand> getSetMitAllenGegenstaenden() {
 		return setMitAllenGegenstaenden;
 	}
 
-	public static void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
-		Spielfeld.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
+	public void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
+		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
 	}
 
-	public static void initSpielfeld() {
+	public void initSpielfeld() {
 		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
 		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller("Keller"));
 		mapAllerRaeumeInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
@@ -73,7 +78,7 @@ public class Spielfeld {
 		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
 	}
 
-	public static Raum ermittleAufenthaltsraumSpieler(Spieler spieler) {
+	public Raum ermittleAufenthaltsraumSpieler(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
 		Raum aufenthaltsraumSpieler = null;
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
@@ -84,7 +89,7 @@ public class Spielfeld {
 		return aufenthaltsraumSpieler;
 	}
 
-	public static HashMap<Point, Raum> ermittleDieNachbarraeume(Spieler spieler) {
+	public HashMap<Point, Raum> ermittleDieNachbarraeume(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
 		mapAllerAktuellenNachbarraeume.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
@@ -95,7 +100,7 @@ public class Spielfeld {
 		return mapAllerAktuellenNachbarraeume;
 	}
 
-	public static void ermittleMoeglicheHimmelsrichtungen(Spieler spieler) {
+	public void ermittleMoeglicheHimmelsrichtungen(Spieler spieler) {
 		aktuelleSpielerPosition = spieler.getPosition();
 		mapMoeglicherHimmelsrichtungen.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerAktuellenNachbarraeume.entrySet()) {
@@ -114,7 +119,7 @@ public class Spielfeld {
 		}
 	}
 
-	public static void initGegenstaende() {
+	public void initGegenstaende() {
 		setMitAllenGegenstaenden.add(new Samuraischwert(STACHUS, "Samuraischwert", 2, 10));
 		setMitAllenGegenstaenden.add(new Apfel(KELLER, "Apfel", 1));
 	}

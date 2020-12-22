@@ -53,25 +53,26 @@ public class TextadventureController implements Initializable {
 	private List<Button> listeMitGegenstandAktionsButtons = new ArrayList<>(Arrays.asList());
 
 	Spieler spieler = new Spieler(new Point(1, 0), "spieler", 30, 10, 10);
+	Spielfeld spielfeld = new Spielfeld();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Spielfeld.initSpielfeld();
+		spielfeld.initSpielfeld();
 		zeigeAufenthaltsraumAktionen();
 
 		// TODO Logik entwickeln, dass nur Gegenstände im spezifischen Raum angezeigt
 		// werden und nicht wie jetzt in jedem Raum
-		Spielfeld.initGegenstaende();
+		spielfeld.initGegenstaende();
 		zeigeGegenstandButtonAktionen();
 	}
 
 	private void zeigeAufenthaltsraumAktionen() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+			textAreaUnten.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
 			textAreaUnten.appendText("\n");
 			textAreaUnten.appendText("\n");
 			textAreaUnten
-					.appendText("Du bist im Raum " + Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
+					.appendText("Du bist im Raum " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
 			starteZugLogik();
 			starteErkundungsLogik();
 		});
@@ -80,21 +81,21 @@ public class TextadventureController implements Initializable {
 	private void starteZugLogik() {
 		vboxOben.getChildren().clear();
 		listeMitRaumAktionsButtons.clear();
-		Spielfeld.ermittleDieNachbarraeume(spieler);
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
+		spielfeld.ermittleDieNachbarraeume(spieler);
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
 		fuegeZugbuttonsInListe();
 		himmelsrichtungButtonsAuflisten();
 		himmelsrichtungButtonsAktivieren();
 	}
 
 	private void starteErkundungsLogik() {
-		erkundungsButton.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " erkunden");
+		erkundungsButton.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " erkunden");
 		buttonMitStyleVersehenUndEinhaengen(erkundungsButton);
 		erkundungsButtonAktivieren();
 	}
 
 	private void fuegeZugbuttonsInListe() {
-		for (Entry<Raum, Himmelsrichtung> entry : Spielfeld.getMapMitHimmelsrichtungen().entrySet()) {
+		for (Entry<Raum, Himmelsrichtung> entry : spielfeld.getMapMoeglicherHimmelsrichtungen().entrySet()) {
 			if (nordButton.getText().contains(entry.getValue().richtungName)) {
 				listeMitRaumAktionsButtons.add(nordButton);
 			}
@@ -138,7 +139,7 @@ public class TextadventureController implements Initializable {
 	private void erkundungsButtonAktivieren() {
 		erkundungsButton.setOnAction(e -> {
 			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
+			textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
 	}
 
@@ -151,7 +152,7 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void fuegeGegenstandbuttonsInListe() {
-		for (Gegenstand g : Spielfeld.getSetMitAllenGegenstaenden()) {
+		for (Gegenstand g : spielfeld.getSetMitAllenGegenstaenden()) {
 			listeMitGegenstandAktionsButtons.add(new Button(g.getName()));
 		}
 	}
@@ -165,11 +166,11 @@ public class TextadventureController implements Initializable {
 	private void zeigeGegenstandButtonAktionen() {
 		gegenstaendeButton.setOnAction(e -> {
 			listeMitGegenstandAktionsButtons.clear();
-			textAreaUnten.setText(Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+			textAreaUnten.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
 			textAreaUnten.appendText("\n");
 			textAreaUnten.appendText("\n");
 			textAreaUnten
-					.appendText("Du bist im Raum " + Spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
+					.appendText("Du bist im Raum " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
 			vboxOben.getChildren().clear();
 			fuegeGegenstandbuttonsInListe();
 			gegenstandButtonsAuflisten();

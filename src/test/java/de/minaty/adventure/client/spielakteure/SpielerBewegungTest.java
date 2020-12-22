@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.Point;
 import java.util.Random;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,16 @@ import de.minaty.adventure.client.Spielfeld;
 
 public class SpielerBewegungTest {
 
+	Spielfeld spielfeld = new Spielfeld();
 	Point startPosition = new Point(1, 0);
 	Spieler spielerActual = new Spieler(startPosition, "spieler", 30, 12, 10);
+
+	@BeforeEach
+	public void init() {
+		spielfeld.getMapAllerRaeumeInDerSpielwelt().clear();
+		spielfeld.getMapAllerAktuellenNachbarraeume().clear();
+		spielfeld.initSpielfeld();
+	}
 
 	@Test
 	public void test_Position_Spieler__Mit_einfacher_Bewegung_nach_Norden() {
@@ -60,33 +69,34 @@ public class SpielerBewegungTest {
 	@Test
 	public void test_Position_Spieler__Mit_Raum_in_dem_Spiel_startet() {
 		// Given:
-		Spielfeld.initSpielfeld();
+		spielfeld.initSpielfeld();
 
 		// When:
-		Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
+		spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Marienplatz", Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
+		assertEquals("Marienplatz", spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
 	@Test
 	public void test_Position_Spieler__Mit_Raum_in_den_sich_Spieler_bewegt() {
 		// Given:
-		Spielfeld.initSpielfeld();
+		spielfeld.initSpielfeld();
 		spielerActual.setPosition(new Point(0, 0));
 
 		// When:
-		Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
+		spielfeld.ermittleAufenthaltsraumSpieler(spielerActual);
 
 		// Then:
-		assertEquals("Stachus", Spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
+		assertEquals("Stachus", spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
+	// TODO Test vollenden
 	@Test
 	@Disabled
 	public void test_Position_Spieler__Ausserhalb_der_Spielwelt() {
 		// Given:
-		Spielfeld.initSpielfeld();
+		spielfeld.initSpielfeld();
 		spielerActual.setPosition(new Point(0, 0));
 
 		// When:

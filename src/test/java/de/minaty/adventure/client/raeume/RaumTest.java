@@ -1,7 +1,7 @@
 package de.minaty.adventure.client.raeume;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -17,14 +17,17 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class RaumTest {
 
+	Spielfeld spielfeld = new Spielfeld();
 	private List<Raum> listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
 	private List<Himmelsrichtung> listeMitDenExitsDesAktuellenAufenthaltsraums = new ArrayList<>(Arrays.asList());
 
 	@BeforeEach
 	public void init() {
-		Spielfeld.initSpielfeld();
 		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.clear();
 		listeMitDenExitsDesAktuellenAufenthaltsraums.clear();
+		spielfeld.getMapAllerRaeumeInDerSpielwelt().clear();
+		spielfeld.getMapAllerAktuellenNachbarraeume().clear();
+		spielfeld.initSpielfeld();
 	}
 
 	@Test
@@ -33,10 +36,11 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(spielfeld.getMapMoeglicherHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).hasSize(1);
@@ -48,10 +52,11 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(spielfeld.getMapMoeglicherHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).hasSize(2);
@@ -63,10 +68,11 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(spielfeld.getMapMoeglicherHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.SUEDEN);
@@ -79,10 +85,11 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(spielfeld.getMapMoeglicherHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.WESTEN);
@@ -94,10 +101,11 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		Spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
-		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitHimmelsrichtungen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+		spielfeld.ermittleMoeglicheHimmelsrichtungen(spielerActual);
+		listeMitDenExitsDesAktuellenAufenthaltsraums.addAll(spielfeld.getMapMoeglicherHimmelsrichtungen().values());
 
 		// Then:
 		assertThat(listeMitDenExitsDesAktuellenAufenthaltsraums).contains(Himmelsrichtung.OSTEN);
@@ -110,8 +118,9 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
 
 		// Then:
 		assertThat(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums).hasSize(1);
@@ -123,8 +132,9 @@ public class RaumTest {
 		Spieler spielerActual = new Spieler(new Point(0, 0), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
 
 		// Then:
 		assertThat(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums).hasSize(2);
@@ -133,64 +143,61 @@ public class RaumTest {
 	@Test
 	public void test_Raum__Name_des_Nachbarraums_vom_Aufenthaltsraum_Keller_abgleichen() {
 		// Given:
+		Spieler spielerActual = new Spieler(new Point(0, 3), "spieler", 30, 12, 10);
+
+		// When:
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+
+		// Then:
+		assertTrue(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()
+				.anyMatch(raumName -> (raumName.getName().equalsIgnoreCase("Wendeltreppe"))));
+	}
+
+	@Test
+	public void test_Raum__Namen_der_Nachbarraeume_vom_Aufenthaltsraum_Kapellenstraße_abgleichen() {
+		// Given:
+		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
+
+		// When:
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
+
+		// Then:
+		assertTrue(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()
+				.anyMatch(raumName -> (raumName.getName().equalsIgnoreCase("Wendeltreppe"))));
+		assertTrue(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()
+				.anyMatch(raumName -> (raumName.getName().equalsIgnoreCase("Stachus"))));
+	}
+
+	@Test
+	public void test_Raum__Zwei_von_zwei_Nachbarraeumen_vom_Aufenthaltsraum_Wendeltreppe_abgleichen() {
+		// Given:
 		Spieler spielerActual = new Spieler(new Point(0, 2), "spieler", 30, 12, 10);
-		String zuFilternderNachbarraumName = null;
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-
-		for (Raum raum : listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums) {
-			if (raum.getName().equals("Kapellenstraße")) {
-				zuFilternderNachbarraumName = raum.getName();
-			}
-		}
-		// Then:
-		assertEquals("Kapellenstraße", zuFilternderNachbarraumName);
-	}
-
-	@Test
-	public void test_Raum__Ein_Name_von_insgesamt_zwei_Nachbarraeumen_vom_Aufenthaltsraum_Kapellenstraße_abgleichen() {
-		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
-		Raum filteredRaum = null;
-
-		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		filteredRaum = listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()//
-				.filter(raumName -> "Keller".equals(raumName.getName())).findAny().orElse(null);
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
 
 		// Then:
-		assertThat(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums).hasSize(2);
-		assertEquals("Keller", filteredRaum.getName());
-	}
-
-	@Test
-	public void test_Raum__Zwei_von_zwei_Nachbarraeumen_vom_Aufenthaltsraum_Kapellenstraße_abgleichen() {
-		// Given:
-		Spieler spielerActual = new Spieler(new Point(0, 1), "spieler", 30, 12, 10);
-		boolean alleNachbarraeumeSindPraesent;
-
-		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
-		alleNachbarraeumeSindPraesent = listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()//
-				.allMatch(raumName -> (raumName.getName().equalsIgnoreCase("Keller"))
-						|| (raumName.getName().equalsIgnoreCase("Stachus")));
-
-		// Then:
-		assertThat(alleNachbarraeumeSindPraesent).isTrue();
+		assertTrue(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()
+				.anyMatch(raumName -> (raumName.getName().equalsIgnoreCase("Keller"))));
+		assertTrue(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.stream()
+				.anyMatch(raumName -> (raumName.getName().equalsIgnoreCase("Kapellenstraße"))));
 	}
 
 	@Test
 	public void test_Raum__Wenn_es_keine_Nachbarraeume_gibt() {
 		// Given:
-		Spieler spielerActual = new Spieler(new Point(27, 17), "spieler", 30, 12, 10);
+		Spieler spielerActual = new Spieler(new Point(99, 99), "spieler", 30, 12, 10);
 
 		// When:
-		Spielfeld.ermittleDieNachbarraeume(spielerActual);
-		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums.addAll(Spielfeld.getMapMitNachbarraeumen().values());
+		spielfeld.ermittleDieNachbarraeume(spielerActual);
+		listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums
+				.addAll(spielfeld.getMapAllerAktuellenNachbarraeume().values());
 
 		// Then:
 		assertThat(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums).hasSize(0);
