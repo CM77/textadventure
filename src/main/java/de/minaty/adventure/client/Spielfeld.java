@@ -2,7 +2,10 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
+import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.gegenstaende.alltagsgegenstaende.Apfel;
 import de.minaty.adventure.client.gegenstaende.waffen.Samuraischwert;
 import de.minaty.adventure.client.raeume.Kapellenstraße;
@@ -28,6 +31,8 @@ public class Spielfeld {
 	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
 	private HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
 	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
+	private Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
+	private Set<Gegenstand> setMitGegenstaendenAktuellerRaum = new HashSet<Gegenstand>();
 
 	public Point getMARIENPLATZ() {
 		return MARIENPLATZ;
@@ -97,6 +102,22 @@ public class Spielfeld {
 		this.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
 	}
 
+	public Set<Gegenstand> getSetMitAllenGegenstaenden() {
+		return setMitAllenGegenstaenden;
+	}
+
+	public void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
+		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
+	}
+
+	public Set<Gegenstand> getSetMitAllenGegenstaendenAktuellerRaum() {
+		return setMitGegenstaendenAktuellerRaum;
+	}
+
+	public void setSetMitAllenGegenstaendenAktuellerRaum(Set<Gegenstand> setMitAllenGegenstaendenAktuellerRaum) {
+		this.setMitGegenstaendenAktuellerRaum = setMitAllenGegenstaendenAktuellerRaum;
+	}
+
 	public void initSpielfeld() {
 		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
 		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller("Keller"));
@@ -146,4 +167,22 @@ public class Spielfeld {
 		}
 	}
 
+	public Set<Gegenstand> befuelleSetMitAllenGegenstaenden() {
+		setMitAllenGegenstaenden.add(apfel);
+		setMitAllenGegenstaenden.add(samuraischwert);
+		return setMitAllenGegenstaenden;
+	}
+
+	public Set<Gegenstand> befuelleSetMitGegenstaendenAktuellerRaum(Spieler spieler) {
+		setMitGegenstaendenAktuellerRaum.clear();
+		if (setMitAllenGegenstaenden.isEmpty()) {
+			befuelleSetMitAllenGegenstaenden();
+		}
+		for (Gegenstand gegenstand : setMitAllenGegenstaenden) {
+			if (gegenstand.getPosition().equals(spieler.getPosition())) {
+				setMitGegenstaendenAktuellerRaum.add(gegenstand);
+			}
+		}
+		return setMitGegenstaendenAktuellerRaum;
+	}
 }

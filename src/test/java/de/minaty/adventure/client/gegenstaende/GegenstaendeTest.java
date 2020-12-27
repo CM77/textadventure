@@ -1,8 +1,12 @@
 package de.minaty.adventure.client.gegenstaende;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +24,7 @@ public class GegenstaendeTest {
 
 	@BeforeEach
 	public void init() {
-		spielfeld.getMapAllerRaeumeInDerSpielwelt().clear();
-		spielfeld.getMapAllerAktuellenNachbarraeume().clear();
+		spielfeld.getSetMitAllenGegenstaendenAktuellerRaum().clear();
 		spielfeld.initSpielfeld();
 	}
 
@@ -67,20 +70,33 @@ public class GegenstaendeTest {
 	}
 
 	@Test
-	public void test_Position__bewege_mehrere_Gegenstaende_in_verschiedene_Raeume() {
+	public void test_Set_Gegenstaende__alle_im_Spielfeld() {
 		// Given:
-		Samuraischwert schwert = spielfeld.getSamuraischwert();
-		Apfel apfel = spielfeld.getApfel();
-		Point expectedRaumEinsMitGegenstand = new Point(0, 4);
-		Point expectedRaumZweiMitGegenstand = new Point(3, 4);
+		Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
+		setMitAllenGegenstaenden = spielfeld.befuelleSetMitAllenGegenstaenden();
 
 		// When:
-		schwert.setPosition(expectedRaumEinsMitGegenstand);
-		apfel.setPosition(expectedRaumZweiMitGegenstand);
 
 		// Then:
-		assertEquals(schwert.getPosition(), expectedRaumEinsMitGegenstand);
-		assertEquals(apfel.getPosition(), expectedRaumZweiMitGegenstand);
+		assertFalse(setMitAllenGegenstaenden.isEmpty());
 	}
 
+	@Test
+	public void test_Set_Gegenstaende__alle_in_einem_Raum() {
+		// Given:
+		Samuraischwert schwert = spielfeld.getSamuraischwert();
+		Set<Gegenstand> setMitGegenstaendenAktuellerRaum = new HashSet<Gegenstand>();
+		setMitGegenstaendenAktuellerRaum = spielfeld.befuelleSetMitGegenstaendenAktuellerRaum(spielerActual);
+		boolean gegenstandImRichtigenRaum = false;
+
+		// When:
+		for (Gegenstand g : setMitGegenstaendenAktuellerRaum) {
+			if (g.getClass().equals(schwert.getClass())) {
+				gegenstandImRichtigenRaum = true;
+			}
+		}
+
+		// Then:
+		assertTrue(gegenstandImRichtigenRaum);
+	}
 }
