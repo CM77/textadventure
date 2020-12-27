@@ -13,6 +13,11 @@ public abstract class Spielobjekt {
 		this.setName(name);
 	}
 
+	protected Spielobjekt(Point position) {
+		super();
+		this.position = position;
+	}
+
 	public Point getPosition() {
 		return position;
 	}

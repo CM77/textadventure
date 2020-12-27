@@ -8,8 +8,8 @@ public abstract class Waffe extends Gegenstand {
 
 	private int maxSchadenspunkte;
 
-	protected Waffe(Point position, String name, int gewicht, int maxSchadenspunkte) {
-		super(position, name, gewicht);
+	protected Waffe(Point position, int gewicht, int maxSchadenspunkte) {
+		super(position, gewicht);
 		this.maxSchadenspunkte = maxSchadenspunkte;
 	}
 
