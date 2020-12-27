@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
-import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
 import javafx.fxml.FXML;
@@ -62,7 +61,6 @@ public class TextadventureController implements Initializable {
 
 		// TODO Logik entwickeln, dass nur Gegenstände im spezifischen Raum angezeigt
 		// werden und nicht wie jetzt in jedem Raum
-		spielfeld.initGegenstaende();
 		zeigeGegenstandButtonAktionen();
 	}
 
@@ -151,12 +149,6 @@ public class TextadventureController implements Initializable {
 		VBox.setVgrow(button, Priority.ALWAYS);
 	}
 
-	private void fuegeGegenstandbuttonsInListe() {
-		for (Gegenstand g : spielfeld.getSetMitAllenGegenstaenden()) {
-			listeMitGegenstandAktionsButtons.add(new Button(g.getName()));
-		}
-	}
-
 	private void gegenstandButtonsAuflisten() {
 		for (Button button : listeMitGegenstandAktionsButtons) {
 			buttonMitStyleVersehenUndEinhaengen(button);
@@ -172,7 +164,6 @@ public class TextadventureController implements Initializable {
 			textAreaUnten
 					.appendText("Du bist im Raum " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
 			vboxOben.getChildren().clear();
-			fuegeGegenstandbuttonsInListe();
 			gegenstandButtonsAuflisten();
 		});
 	}

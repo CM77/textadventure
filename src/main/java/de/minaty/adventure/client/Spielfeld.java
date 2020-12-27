@@ -2,10 +2,7 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
-import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.gegenstaende.alltagsgegenstaende.Apfel;
 import de.minaty.adventure.client.gegenstaende.waffen.Samuraischwert;
 import de.minaty.adventure.client.raeume.Kapellenstraße;
@@ -18,17 +15,55 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class Spielfeld {
 
-	private Point aktuelleSpielerPosition;
-	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
-	private HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
-	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
-	private Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
-
 	private final Point MARIENPLATZ = new Point(1, 0);
 	private final Point STACHUS = new Point(0, 0);
 	private final Point KAPELLENSTRASSE = new Point(0, 1);
 	private final Point WENDELTREPPE = new Point(0, 2);
 	private final Point KELLER = new Point(0, 3);
+
+	private Samuraischwert samuraischwert = new Samuraischwert(STACHUS, 10, 10);
+	private Apfel apfel = new Apfel(KELLER, 1);
+
+	private Point aktuelleSpielerPosition;
+	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
+	private HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
+	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
+
+	public Point getMARIENPLATZ() {
+		return MARIENPLATZ;
+	}
+
+	public Point getSTACHUS() {
+		return STACHUS;
+	}
+
+	public Point getKAPELLENSTRASSE() {
+		return KAPELLENSTRASSE;
+	}
+
+	public Point getWENDELTREPPE() {
+		return WENDELTREPPE;
+	}
+
+	public Point getKELLER() {
+		return KELLER;
+	}
+
+	public Samuraischwert getSamuraischwert() {
+		return samuraischwert;
+	}
+
+	public void setSamuraischwert(Samuraischwert samuraischwert) {
+		this.samuraischwert = samuraischwert;
+	}
+
+	public Apfel getApfel() {
+		return apfel;
+	}
+
+	public void setApfel(Apfel apfel) {
+		this.apfel = apfel;
+	}
 
 	public Point getAktuelleSpielerPosition() {
 		return aktuelleSpielerPosition;
@@ -60,14 +95,6 @@ public class Spielfeld {
 
 	public void setMapMoeglicherHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
 		this.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
-	}
-
-	public Set<Gegenstand> getSetMitAllenGegenstaenden() {
-		return setMitAllenGegenstaenden;
-	}
-
-	public void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
-		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
 	}
 
 	public void initSpielfeld() {
@@ -119,8 +146,4 @@ public class Spielfeld {
 		}
 	}
 
-	public void initGegenstaende() {
-		setMitAllenGegenstaenden.add(new Samuraischwert(STACHUS, "Samuraischwert", 2, 10));
-		setMitAllenGegenstaenden.add(new Apfel(KELLER, "Apfel", 1));
-	}
 }
