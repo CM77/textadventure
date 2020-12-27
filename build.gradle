@@ -23,7 +23,11 @@ testCompile("org.assertj:assertj-core:3.18.1")
 
 //add
 javafx {
-    version = "14"
+    version = "15"
     modules = [ 'javafx.base',  'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
 }
+
+apply plugin: 'java'
+sourceCompatibility = 15
+targetCompatibility = 15
 
