@@ -48,7 +48,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="gegenstaendeButton" minWidth="90.0" mnemonicParsing="false" text="Gegenstände">
+                  <Button fx:id="gegenstandButton" minWidth="90.0" mnemonicParsing="false" text="Gegenstände">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>

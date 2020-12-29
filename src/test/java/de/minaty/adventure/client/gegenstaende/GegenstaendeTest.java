@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class GegenstaendeTest {
 
 	@BeforeEach
 	public void init() {
-		spielfeld.getSetMitAllenGegenstaendenAktuellerRaum().clear();
+		spielfeld.getSetMitGegenstaendenAktuellerRaum().clear();
 		spielfeld.initSpielfeld();
 	}
 
@@ -86,6 +87,7 @@ public class GegenstaendeTest {
 		// Given:
 		Samuraischwert schwert = spielfeld.getSamuraischwert();
 		Set<Gegenstand> setMitGegenstaendenAktuellerRaum = new HashSet<Gegenstand>();
+		spielfeld.befuelleSetMitAllenGegenstaenden();
 		setMitGegenstaendenAktuellerRaum = spielfeld.befuelleSetMitGegenstaendenAktuellerRaum(spielerActual);
 		boolean gegenstandImRichtigenRaum = false;
 
@@ -98,5 +100,34 @@ public class GegenstaendeTest {
 
 		// Then:
 		assertTrue(gegenstandImRichtigenRaum);
+	}
+
+	@Test
+	public void test_Set_Gegenstand__eine_bestimmte_Aktion_durchfuehren() {
+		// Given:
+		Samuraischwert schwert = new Samuraischwert(stachus, null, 0, 0);
+		String aktionsText = null;
+
+		// When:
+		aktionsText = schwert.untersuchen();
+
+		// Then:
+		assertEquals(aktionsText, spielfeld.getSamuraischwert().untersuchen());
+	}
+
+	@Test
+	public void test_Set_Gegenstand__Auswahl_Aktionen_bereitstellen() {
+		// Given:
+		Apfel apfel = spielfeld.getApfel();
+		Set<Method> setMitGegenstandAktionen = new HashSet<Method>();
+
+		// When:
+		for (Method m : apfel.getClass().getDeclaredMethods()) {
+			setMitGegenstandAktionen.add(m);
+		}
+		spielfeld.befuelleSetMitGegenstandAktionen(apfel);
+
+		// Then:
+		assertEquals(setMitGegenstandAktionen, spielfeld.getSetMitGegenstandAktionen());
 	}
 }

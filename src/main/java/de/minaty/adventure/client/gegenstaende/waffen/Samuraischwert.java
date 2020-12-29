@@ -4,8 +4,8 @@ import java.awt.Point;
 
 public final class Samuraischwert extends Waffe {
 
-	public Samuraischwert(Point position, int gewicht, int maxSchadenspunkte) {
-		super(position, gewicht, maxSchadenspunkte);
+	public Samuraischwert(Point position, String name, int gewicht, int maxSchadenspunkte) {
+		super(position, name, gewicht, maxSchadenspunkte);
 	}
 
 	@Override

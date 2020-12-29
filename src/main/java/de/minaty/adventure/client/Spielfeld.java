@@ -1,6 +1,7 @@
 package de.minaty.adventure.client;
 
 import java.awt.Point;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,8 +25,9 @@ public class Spielfeld {
 	private final Point WENDELTREPPE = new Point(0, 2);
 	private final Point KELLER = new Point(0, 3);
 
-	private Samuraischwert samuraischwert = new Samuraischwert(STACHUS, 10, 10);
-	private Apfel apfel = new Apfel(KELLER, 1);
+	private Samuraischwert samuraischwert = new Samuraischwert(STACHUS, "Samuraischwert", 10, 10);
+	private Apfel gruenerApfel = new Apfel(KELLER, "grüner Apfel", 1);
+	private Apfel roterApfel = new Apfel(STACHUS, "roter Apfel", 1);
 
 	private Point aktuelleSpielerPosition;
 	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
@@ -33,6 +35,7 @@ public class Spielfeld {
 	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
 	private Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
 	private Set<Gegenstand> setMitGegenstaendenAktuellerRaum = new HashSet<Gegenstand>();
+	private Set<Method> setMitGegenstandAktionen = new HashSet<Method>();
 
 	public Point getMARIENPLATZ() {
 		return MARIENPLATZ;
@@ -63,11 +66,11 @@ public class Spielfeld {
 	}
 
 	public Apfel getApfel() {
-		return apfel;
+		return gruenerApfel;
 	}
 
 	public void setApfel(Apfel apfel) {
-		this.apfel = apfel;
+		this.gruenerApfel = apfel;
 	}
 
 	public Point getAktuelleSpielerPosition() {
@@ -110,12 +113,20 @@ public class Spielfeld {
 		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
 	}
 
-	public Set<Gegenstand> getSetMitAllenGegenstaendenAktuellerRaum() {
+	public Set<Gegenstand> getSetMitGegenstaendenAktuellerRaum() {
 		return setMitGegenstaendenAktuellerRaum;
 	}
 
-	public void setSetMitAllenGegenstaendenAktuellerRaum(Set<Gegenstand> setMitAllenGegenstaendenAktuellerRaum) {
+	public void setSetMitGegenstaendenAktuellerRaum(Set<Gegenstand> setMitAllenGegenstaendenAktuellerRaum) {
 		this.setMitGegenstaendenAktuellerRaum = setMitAllenGegenstaendenAktuellerRaum;
+	}
+
+	public Set<Method> getSetMitGegenstandAktionen() {
+		return setMitGegenstandAktionen;
+	}
+
+	public void setSetMitGegenstandAktionen(Set<Method> setMitGegenstandAktionen) {
+		this.setMitGegenstandAktionen = setMitGegenstandAktionen;
 	}
 
 	public void initSpielfeld() {
@@ -127,10 +138,9 @@ public class Spielfeld {
 	}
 
 	public Raum ermittleAufenthaltsraumSpieler(Spieler spieler) {
-		aktuelleSpielerPosition = spieler.getPosition();
 		Raum aufenthaltsraumSpieler = null;
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
-			if (aktuelleSpielerPosition.equals(entry.getKey())) {
+			if (spieler.getPosition().equals(entry.getKey())) {
 				aufenthaltsraumSpieler = entry.getValue();
 			}
 		}
@@ -138,10 +148,9 @@ public class Spielfeld {
 	}
 
 	public HashMap<Point, Raum> ermittleDieNachbarraeume(Spieler spieler) {
-		aktuelleSpielerPosition = spieler.getPosition();
 		mapAllerAktuellenNachbarraeume.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerRaeumeInDerSpielwelt.entrySet()) {
-			if (entry.getKey().distance(aktuelleSpielerPosition) == 1) {
+			if (entry.getKey().distance(spieler.getPosition()) == 1) {
 				mapAllerAktuellenNachbarraeume.put(entry.getKey(), entry.getValue());
 			}
 		}
@@ -149,40 +158,45 @@ public class Spielfeld {
 	}
 
 	public void ermittleMoeglicheHimmelsrichtungen(Spieler spieler) {
-		aktuelleSpielerPosition = spieler.getPosition();
 		mapMoeglicherHimmelsrichtungen.clear();
 		for (HashMap.Entry<Point, Raum> entry : mapAllerAktuellenNachbarraeume.entrySet()) {
-			if (entry.getKey().y == aktuelleSpielerPosition.y + 1) {
+			if (entry.getKey().y == spieler.getPosition().y + 1) {
 				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.NORDEN);
 			}
-			if (entry.getKey().y == aktuelleSpielerPosition.y - 1) {
+			if (entry.getKey().y == spieler.getPosition().y - 1) {
 				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.SUEDEN);
 			}
-			if (entry.getKey().x == aktuelleSpielerPosition.x + 1) {
+			if (entry.getKey().x == spieler.getPosition().x + 1) {
 				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.OSTEN);
 			}
-			if (entry.getKey().x == aktuelleSpielerPosition.x - 1) {
+			if (entry.getKey().x == spieler.getPosition().x - 1) {
 				mapMoeglicherHimmelsrichtungen.put(entry.getValue(), Himmelsrichtung.WESTEN);
 			}
 		}
 	}
 
 	public Set<Gegenstand> befuelleSetMitAllenGegenstaenden() {
-		setMitAllenGegenstaenden.add(apfel);
+		setMitAllenGegenstaenden.add(gruenerApfel);
+		setMitAllenGegenstaenden.add(roterApfel);
 		setMitAllenGegenstaenden.add(samuraischwert);
 		return setMitAllenGegenstaenden;
 	}
 
 	public Set<Gegenstand> befuelleSetMitGegenstaendenAktuellerRaum(Spieler spieler) {
 		setMitGegenstaendenAktuellerRaum.clear();
-		if (setMitAllenGegenstaenden.isEmpty()) {
-			befuelleSetMitAllenGegenstaenden();
-		}
 		for (Gegenstand gegenstand : setMitAllenGegenstaenden) {
 			if (gegenstand.getPosition().equals(spieler.getPosition())) {
 				setMitGegenstaendenAktuellerRaum.add(gegenstand);
 			}
 		}
 		return setMitGegenstaendenAktuellerRaum;
+	}
+
+	public Set<Method> befuelleSetMitGegenstandAktionen(Gegenstand gegenstand) {
+		setMitGegenstandAktionen.clear();
+		for (Method methode : gegenstand.getClass().getDeclaredMethods()) {
+			setMitGegenstandAktionen.add(methode);
+		}
+		return setMitGegenstandAktionen;
 	}
 }
