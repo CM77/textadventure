@@ -14,14 +14,16 @@ import java.util.ResourceBundle;
 import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -45,9 +47,9 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private VBox vboxOben;
 	@FXML
-	private TextArea textAreaUnten;
+	private TextArea textausgabeTa;
 	@FXML
-	private Label aufenthaltsraumLabel;
+	private TextField aufenthaltsraumTf;
 
 	private Button nordButton = new Button("nach Norden gehen");
 	private Button suedButton = new Button("nach Süden gehen");
@@ -69,21 +71,56 @@ public class TextadventureController implements Initializable {
 		zeigeOptionenAufenthaltsraum();
 		spielfeld.befuelleSetMitAllenGegenstaenden();
 		zeigeGegenstaende();
+		starteTastenkombis();
 	}
 
+	private void starteTastenkombis() {
+		// TODO ideal, wenn KeyEvent-Listener im ganzen Fenster der Anwendung aktiv
+		// "zuhört" und nicht nur in textausgabeTa-Bereich
+		textausgabeTa.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				switch (event.getCode()) {
+				case UP:
+					textAusgabe(spieler.nachNordenBewegen());
+					break;
+				case DOWN:
+					textAusgabe(spieler.nachSuedenBewegen());
+					break;
+				case LEFT:
+					textAusgabe(spieler.nachWestenBewegen());
+					break;
+				case RIGHT:
+					textAusgabe(spieler.nachOstenBewegen());
+					break;
+				default:
+					break;
+				}
+			}
+		});
+	}
+
+	private void textAusgabe(String ausgabe) {
+		zeigeAufenthaltsraum();
+		textausgabeTa.setText(ausgabe);
+	}
+
+	private void zeigeAufenthaltsraum() {
+		aufenthaltsraumTf.setText("Du bist hier: " //
+				+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+	}
+
+	// FIXME "unmögliche" Zugbewegungen ausschließen für Spieler
 	private void zeigeOptionenAufenthaltsraum() {
 		raumButton.setOnAction(e -> {
 			starteZugLogik();
 			starteErkundungsLogik();
+			zeigeAufenthaltsraum();
 		});
 	}
 
-	// TODO Thread bauen, der alle paar Sekunden Aufenthaltsraum feststellt und hier
-	// ausgibt
-	private void zeigeAufenthaltsraum() {
-		aufenthaltsraumLabel.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
-	}
-
+	// TODO Zug soll sofort Optionen in vBoxOben aktualisieren und nicht erst bei
+	// Klick auf "Raum"
 	private void starteZugLogik() {
 		vboxOben.getChildren().clear();
 		listeMitRaumAktionsButtons.clear();
@@ -119,20 +156,16 @@ public class TextadventureController implements Initializable {
 
 	private void himmelsrichtungButtonsAktivieren() {
 		nordButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(spieler.nachNordenBewegen());
+			textAusgabe(spieler.nachNordenBewegen());
 		});
 		suedButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(spieler.nachSuedenBewegen());
+			textAusgabe(spieler.nachSuedenBewegen());
 		});
 		ostButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(spieler.nachOstenBewegen());
+			textAusgabe(spieler.nachOstenBewegen());
 		});
 		westButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText(spieler.nachWestenBewegen());
+			textAusgabe(spieler.nachWestenBewegen());
 		});
 	}
 
@@ -144,19 +177,18 @@ public class TextadventureController implements Initializable {
 
 	private void erkundungsButtonAktivieren() {
 		erkundungsButton.setOnAction(e -> {
-			textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
+			textAusgabe(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
 	}
 
 	private void zeigeGegenstaende() {
 		gegenstandButton.setOnAction(e -> {
-			textAreaUnten.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
-			textAreaUnten.appendText("\n");
 			starteGegenstandsLogik();
 		});
 	}
 
 	private void starteGegenstandsLogik() {
+		zeigeAufenthaltsraum();
 		vboxOben.getChildren().clear();
 		listeMitGegenstandButtons.clear();
 		fuegeGegenstandButtonsInListe();
@@ -187,6 +219,7 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void starteGegenstandAktionenLogik() {
+		zeigeAufenthaltsraum();
 		vboxOben.getChildren().clear();
 		fuegeGegenstandAktionenButtonsInListe();
 		gegenstandAktionenButtonsVorbereiten();
@@ -220,7 +253,7 @@ public class TextadventureController implements Initializable {
 						try {
 							methode = aktuellerGegenstand.getClass().getDeclaredMethod(methode.getName());
 							methode.setAccessible(true);
-							textAreaUnten.appendText(methode.invoke(aktuellerGegenstand).toString());
+							textausgabeTa.appendText(methode.invoke(aktuellerGegenstand).toString());
 						} catch (NoSuchMethodException | SecurityException | IllegalAccessException
 								| IllegalArgumentException | InvocationTargetException excep) {
 							// TODO Excep-Message
