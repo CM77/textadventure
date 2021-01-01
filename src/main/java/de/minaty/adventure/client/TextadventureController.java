@@ -63,21 +63,25 @@ public class TextadventureController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		spielfeld.initSpielfeld();
-		zeigeAufenthaltsraumAktionen();
+		zeigeOptionenAufenthaltsraum();
 		spielfeld.befuelleSetMitAllenGegenstaenden();
 		zeigeGegenstaende();
 	}
 
-	private void zeigeAufenthaltsraumAktionen() {
+	private void zeigeOptionenAufenthaltsraum() {
 		raumButton.setOnAction(e -> {
-			textAreaUnten.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
-			textAreaUnten.appendText("\n");
-			textAreaUnten.appendText("\n");
-			textAreaUnten
-					.appendText("Du bist im Raum " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + ".");
+			zeigeAufenthaltsraum();
 			starteZugLogik();
 			starteErkundungsLogik();
 		});
+	}
+
+	private void zeigeAufenthaltsraum() {
+		textAreaUnten.appendText("\n");
+		textAreaUnten.appendText("\n");
+		textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+		textAreaUnten.appendText("\n");
+		textAreaUnten.appendText("\n");
 	}
 
 	private void starteZugLogik() {
@@ -88,12 +92,6 @@ public class TextadventureController implements Initializable {
 		fuegeZugbuttonsInListe();
 		himmelsrichtungButtonsVorbereiten();
 		himmelsrichtungButtonsAktivieren();
-	}
-
-	private void starteErkundungsLogik() {
-		erkundungsButton.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " erkunden");
-		buttonMitStyleVersehenUndEinhaengen(erkundungsButton);
-		erkundungsButtonAktivieren();
 	}
 
 	private void fuegeZugbuttonsInListe() {
@@ -138,9 +136,15 @@ public class TextadventureController implements Initializable {
 		});
 	}
 
+	private void starteErkundungsLogik() {
+		erkundungsButton.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " erkunden");
+		buttonMitStyleVersehenUndEinhaengen(erkundungsButton);
+		erkundungsButtonAktivieren();
+	}
+
 	private void erkundungsButtonAktivieren() {
 		erkundungsButton.setOnAction(e -> {
-			textAreaUnten.appendText("\n");
+			zeigeAufenthaltsraum();
 			textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
 	}
@@ -177,7 +181,6 @@ public class TextadventureController implements Initializable {
 	private void gegenstandButtonsAktivieren() {
 		for (Button button : listeMitGegenstandButtons) {
 			button.setOnAction(e -> {
-				textAreaUnten.appendText("\n");
 				aktuellerGegenstandButton = button;
 				starteGegenstandAktionenLogik();
 			});
@@ -213,7 +216,7 @@ public class TextadventureController implements Initializable {
 	private void gegenstandAktionenButtonsAktivieren() {
 		for (Button button : listeMitGegenstandAktionenButtons) {
 			button.setOnAction(e -> {
-				textAreaUnten.appendText("\n");
+				zeigeAufenthaltsraum();
 				for (Method methode : spielfeld.getSetMitGegenstandAktionen()) {
 					if (button.getText().equals(methode.getName())) {
 						try {

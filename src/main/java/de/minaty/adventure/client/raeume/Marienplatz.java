@@ -8,7 +8,7 @@ public final class Marienplatz extends Raum {
 
 	@Override
 	public String erkunden() {
-		return "Das ist der Marienplatz. Viele Touristen knipsen Fotos und warten auf das Glockenspiel im Rathaus.";
+		return "Viele Touristen knipsen Fotos und warten auf das Glockenspiel im Rathaus.";
 	}
 
 }
