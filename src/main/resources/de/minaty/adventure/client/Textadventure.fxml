@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
    <center>
       <SplitPane dividerPositions="0.3, 0.4" orientation="VERTICAL" prefHeight="504.0" prefWidth="800.0">
         <items>
