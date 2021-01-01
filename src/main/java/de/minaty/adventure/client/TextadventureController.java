@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -45,6 +46,8 @@ public class TextadventureController implements Initializable {
 	private VBox vboxOben;
 	@FXML
 	private TextArea textAreaUnten;
+	@FXML
+	private Label aufenthaltsraumLabel;
 
 	private Button nordButton = new Button("nach Norden gehen");
 	private Button suedButton = new Button("nach Süden gehen");
@@ -70,18 +73,15 @@ public class TextadventureController implements Initializable {
 
 	private void zeigeOptionenAufenthaltsraum() {
 		raumButton.setOnAction(e -> {
-			zeigeAufenthaltsraum();
 			starteZugLogik();
 			starteErkundungsLogik();
 		});
 	}
 
+	// TODO Thread bauen, der alle paar Sekunden Aufenthaltsraum feststellt und hier
+	// ausgibt
 	private void zeigeAufenthaltsraum() {
-		textAreaUnten.appendText("\n");
-		textAreaUnten.appendText("\n");
-		textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
-		textAreaUnten.appendText("\n");
-		textAreaUnten.appendText("\n");
+		aufenthaltsraumLabel.setText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
 	}
 
 	private void starteZugLogik() {
@@ -144,7 +144,6 @@ public class TextadventureController implements Initializable {
 
 	private void erkundungsButtonAktivieren() {
 		erkundungsButton.setOnAction(e -> {
-			zeigeAufenthaltsraum();
 			textAreaUnten.appendText(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
 	}
@@ -216,7 +215,6 @@ public class TextadventureController implements Initializable {
 	private void gegenstandAktionenButtonsAktivieren() {
 		for (Button button : listeMitGegenstandAktionenButtons) {
 			button.setOnAction(e -> {
-				zeigeAufenthaltsraum();
 				for (Method methode : spielfeld.getSetMitGegenstandAktionen()) {
 					if (button.getText().equals(methode.getName())) {
 						try {
