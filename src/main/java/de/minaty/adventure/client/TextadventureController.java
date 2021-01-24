@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import de.minaty.adventure.client.gegenstaende.Gegenstand;
 import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -38,6 +40,10 @@ public class TextadventureController implements Initializable {
 
 	@FXML
 	private Parent root;
+	@FXML
+	private MenuItem spielSpeichern;
+	@FXML
+	private MenuItem spielBeenden;
 	@FXML
 	private Button raumButton;
 	@FXML
@@ -70,9 +76,28 @@ public class TextadventureController implements Initializable {
 		spielfeld.initSpielfeld();
 		zeigeOptionenAufenthaltsraum();
 		spielfeld.befuelleSetMitAllenGegenstaenden();
+		starteMenueSetup();
 		zeigeGegenstaende();
 		starteTastenkombis();
 	}
+
+	private void starteMenueSetup() {
+		spielSpeichern.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				spielfeld.schreibeProperties(spieler);
+			}
+		});
+		spielBeenden.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+// TODO Vorher Abfrage ob Spielstand gesichert werden soll
+				System.exit(0);
+			}
+		});
+	}
+
+	// Spielersteuerung
 
 	private void starteTastenkombis() {
 		// TODO ideal, wenn KeyEvent-Listener im ganzen Fenster der Anwendung aktiv

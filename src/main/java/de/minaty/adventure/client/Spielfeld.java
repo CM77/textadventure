@@ -1,9 +1,13 @@
 package de.minaty.adventure.client;
 
 import java.awt.Point;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 import de.minaty.adventure.client.gegenstaende.Gegenstand;
@@ -198,5 +202,23 @@ public class Spielfeld {
 			setMitGegenstandAktionen.add(methode);
 		}
 		return setMitGegenstandAktionen;
+	}
+
+	// Menüsteuerung
+
+	public void schreibeProperties(Spieler spieler) {
+		Properties props = new Properties();
+		props.setProperty("userPositionX", String.valueOf(spieler.getPosition().x));
+		props.setProperty("userPositionY", String.valueOf(spieler.getPosition().y));
+
+		try {
+			FileOutputStream fos = new FileOutputStream("TextAdPropsDatei.txt");
+			props.store(fos, "");
+			fos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

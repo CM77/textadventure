@@ -71,10 +71,10 @@
             <MenuItem mnemonicParsing="false" text="Neues Spiel" />
             <MenuItem mnemonicParsing="false" text="Öffnen..." />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Spiel sichern" />
+            <MenuItem fx:id="spielSpeichern" mnemonicParsing="false" text="Spiel sichern" />
             <MenuItem mnemonicParsing="false" text="Spiel sichern als…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Beenden" />
+            <MenuItem fx:id="spielBeenden" mnemonicParsing="false" text="Beenden" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Hilfe">
