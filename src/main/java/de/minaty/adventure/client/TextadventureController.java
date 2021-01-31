@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import de.minaty.adventure.client.gegenstaende.Gegenstand;
@@ -21,7 +22,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -91,8 +96,16 @@ public class TextadventureController implements Initializable {
 		spielBeenden.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-// TODO Vorher Abfrage ob Spielstand gesichert werden soll
-				System.exit(0);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setHeaderText("Spiel wirklich beenden?");
+				ButtonType btJa = new ButtonType("Ja");
+				ButtonType btAbbruch = new ButtonType("Abbrechen", ButtonData.CANCEL_CLOSE);
+				alert.getButtonTypes().setAll(btJa, btAbbruch);
+				Optional<ButtonType> result = alert.showAndWait();
+
+				if (result.get() == btJa) {
+					System.exit(0);
+				}
 			}
 		});
 	}
