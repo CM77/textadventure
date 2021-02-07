@@ -46,8 +46,6 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private Parent root;
 	@FXML
-	private MenuItem spielSpeichern;
-	@FXML
 	private MenuItem spielBeenden;
 	@FXML
 	private Button raumButton;
@@ -86,13 +84,9 @@ public class TextadventureController implements Initializable {
 		starteTastenkombis();
 	}
 
+	// Menüsteuerung
+
 	private void starteMenueSetup() {
-		spielSpeichern.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				spielfeld.schreibeProperties(spieler);
-			}
-		});
 		spielBeenden.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

@@ -87,6 +87,7 @@ nb-configuration.xml
 ## Editors
 ##############################
 *.docx
+*.txt
 
 # Ignore Gradle build output directory
 build

@@ -1,4 +1,0 @@
-#
-#Sun Jan 31 19:46:47 CET 2021
-userPositionX=1
-userPositionY=0

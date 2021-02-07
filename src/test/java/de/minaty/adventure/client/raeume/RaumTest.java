@@ -1,6 +1,7 @@
 package de.minaty.adventure.client.raeume;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
@@ -201,5 +202,19 @@ public class RaumTest {
 
 		// Then:
 		assertThat(listeMitDenNachbarraeumenDesAktuellenAufenthaltsraums).hasSize(0);
+	}
+
+	@Test
+	public void test_Raum__getName() {
+		// Given:
+		Spieler spielerActual = new Spieler(new Point(1, 0), "spieler", 30, 12, 10);
+		String expected = "Stachus";
+
+		// When:
+		Stachus stachus = new Stachus("Stachus");
+		String actual = stachus.getName();
+
+		// Then:
+		assertEquals(expected, actual);
 	}
 }
