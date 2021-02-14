@@ -202,7 +202,4 @@ public class Spielfeld {
 		}
 		return setMitGegenstandAktionen;
 	}
-
-	// Menüsteuerung
-
 }

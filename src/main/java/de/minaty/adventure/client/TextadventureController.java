@@ -81,7 +81,7 @@ public class TextadventureController implements Initializable {
 		spielfeld.befuelleSetMitAllenGegenstaenden();
 		starteMenueSetup();
 		zeigeGegenstaende();
-		starteTastenkombis();
+		starteKeyEventHandler();
 	}
 
 	// Menüsteuerung
@@ -106,24 +106,42 @@ public class TextadventureController implements Initializable {
 
 	// Spielersteuerung
 
-	private void starteTastenkombis() {
-		// TODO ideal, wenn KeyEvent-Listener im ganzen Fenster der Anwendung aktiv
-		// "zuhört" und nicht nur in textausgabeTa-Bereich
-		textausgabeTa.setOnKeyPressed(new EventHandler<KeyEvent>() {
+	private void starteKeyEventHandler() {
+		root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
 			@Override
 			public void handle(KeyEvent event) {
 				switch (event.getCode()) {
 				case UP:
-					textAusgabe(spieler.nachNordenBewegen());
+					// TODO elegantere Lösung für Prüfung für illegalen Zug finden, sonsonsten
+					// falsche Ausgabe ("Du gehst nach Norden" erscheint im Label, obgleich Zug
+					// sofort rückgängig gemacht wird!
+					spieler.nachNordenBewegen();
+					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
+						spieler.nachSuedenBewegen();
+					}
+					textAusgabe("Du gehst nach Norden.");
 					break;
 				case DOWN:
-					textAusgabe(spieler.nachSuedenBewegen());
+					spieler.nachSuedenBewegen();
+					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
+						spieler.nachNordenBewegen();
+					}
+					textAusgabe("Du gehst nach Süden.");
 					break;
 				case LEFT:
-					textAusgabe(spieler.nachWestenBewegen());
+					spieler.nachWestenBewegen();
+					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
+						spieler.nachOstenBewegen();
+					}
+					textAusgabe("Du gehst nach Osten.");
 					break;
 				case RIGHT:
-					textAusgabe(spieler.nachOstenBewegen());
+					spieler.nachOstenBewegen();
+					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
+						spieler.nachWestenBewegen();
+					}
+					textAusgabe("Du gehst nach Westen.");
 					break;
 				default:
 					break;
@@ -138,11 +156,12 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void zeigeAufenthaltsraum() {
-		aufenthaltsraumTf.setText("Du bist hier: " //
-				+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+		if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) != null) {
+			aufenthaltsraumTf.setText("Du bist hier: " //
+					+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+		}
 	}
 
-	// FIXME "unmögliche" Zugbewegungen ausschließen für Spieler
 	private void zeigeOptionenAufenthaltsraum() {
 		raumButton.setOnAction(e -> {
 			starteZugLogik();
@@ -152,7 +171,7 @@ public class TextadventureController implements Initializable {
 	}
 
 	// TODO Zug soll sofort Optionen in vBoxOben aktualisieren und nicht erst bei
-	// Klick auf "Raum"
+	// Klick auf "Raum"!
 	private void starteZugLogik() {
 		vboxOben.getChildren().clear();
 		listeMitRaumAktionsButtons.clear();

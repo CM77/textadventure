@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import de.minaty.adventure.client.Spielfeld;
@@ -91,17 +90,4 @@ public class SpielerBewegungTest {
 		assertEquals("Stachus", spielfeld.ermittleAufenthaltsraumSpieler(spielerActual).getName());
 	}
 
-	// TODO Test vollenden
-	@Test
-	@Disabled
-	public void test_Position_Spieler__Ausserhalb_der_Spielwelt() {
-		// Given:
-		spielfeld.initSpielfeld();
-		spielerActual.setPosition(new Point(0, 0));
-
-		// When:
-		spielerActual.nachSuedenBewegen();
-
-		// Then:
-	}
 }
