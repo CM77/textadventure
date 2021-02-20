@@ -5,6 +5,9 @@ plugins {
   	id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
+apply plugin: 'java'
+sourceCompatibility = 15
+targetCompatibility = 15
 
 //add
 mainClassName = 'de.minaty.adventure.client.TextadventureMain'
@@ -17,8 +20,11 @@ dependencies {
 api 'com.google.guava:guava:23.0'
 
 testImplementation(platform('org.junit:junit-bom:5.7.0'))
-	testImplementation('org.junit.jupiter:junit-jupiter')
+testImplementation('org.junit.jupiter:junit-jupiter')
 testCompile("org.assertj:assertj-core:3.18.1")
+
+compile 'org.beanfabrics:beanfabrics-core:1.4.3'
+// wo binde ich beanfabrics fx ein?
 }
 
 //add
@@ -26,8 +32,3 @@ javafx {
     version = "15"
     modules = [ 'javafx.base',  'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
 }
-
-apply plugin: 'java'
-sourceCompatibility = 15
-targetCompatibility = 15
-
