@@ -152,9 +152,18 @@ public class TextadventureController implements Initializable {
 
 	private void textAusgabe(String ausgabe) {
 		zeigeAufenthaltsraum();
-		textausgabeTa.setText(ausgabe);
+		textausgabeTa.appendText(ausgabe //
+				+ "\n" //
+				+ "\n" //
+				+ "-- " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " --" //
+				+ "\n" //
+				+ "\n" //
+		);
 	}
 
+	// TODO muss aktueller Ort noch im Label ausgegeben werden? Siehe laufende
+	// Orts-Aktualisierung im textausgabeTa. Label evtl für andere wichtige Werte
+	// wie Lebensenergie, Zeit etc. nutzen?
 	private void zeigeAufenthaltsraum() {
 		if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) != null) {
 			aufenthaltsraumTf.setText("Du bist hier: " //
