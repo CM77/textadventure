@@ -150,15 +150,16 @@ public class TextadventureController implements Initializable {
 		});
 	}
 
+	// TODO vor dem ersten Zug wirkt Leerzeile vor dem Aufenthaltsraum merkwürdig.
+	// Dort könnte Intro-Text rein?
 	private void textAusgabe(String ausgabe) {
 		zeigeAufenthaltsraum();
-		textausgabeTa.appendText(ausgabe //
-				+ "\n" //
-				+ "\n" //
-				+ "-- " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " --" //
-				+ "\n" //
-				+ "\n" //
-		);
+		textausgabeTa.appendText( //
+				"\n" //
+						+ "\n" //
+						+ "-- " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " --" + "\n" //
+						+ "\n" //
+						+ ausgabe);
 	}
 
 	// TODO muss aktueller Ort noch im Label ausgegeben werden? Siehe laufende
