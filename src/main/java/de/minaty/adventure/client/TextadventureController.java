@@ -56,7 +56,8 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private VBox vboxOben;
 	@FXML
-	private TextArea textausgabeTa;
+	private TextArea textausgabeTa; // TODO TextFlow für farbige Elemente hier?
+									// https://www.tutorialspoint.com/javafx/layout_panes_textflow.htm
 	@FXML
 	private TextField aufenthaltsraumTf;
 
@@ -82,6 +83,7 @@ public class TextadventureController implements Initializable {
 		starteMenueSetup();
 		zeigeGegenstaende();
 		starteKeyEventHandler();
+		aufenthaltsraumTf.getStyleClass().add("aufenthaltsraumTf");
 	}
 
 	// Menüsteuerung

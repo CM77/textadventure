@@ -55,7 +55,7 @@
                   </HBox>
                </children>
             </GridPane>
-            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
+            <ScrollPane fitToHeight="true" fitToWidth="true">
                <content>
                   <TextArea fx:id="textausgabeTa" editable="false" />
                </content>
@@ -94,7 +94,7 @@
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="aufenthaltsraumTf" />
+            <TextField fx:id="aufenthaltsraumTf" editable="false"/>
          </children>
       </GridPane>
    </bottom>

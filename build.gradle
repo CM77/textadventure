@@ -14,6 +14,9 @@ mainClassName = 'de.minaty.adventure.client.TextadventureMain'
 
 repositories {
     mavenCentral()
+    flatDir {
+        dir 'lib'
+    }
 }
 
 dependencies {
@@ -24,7 +27,6 @@ testImplementation('org.junit.jupiter:junit-jupiter')
 testCompile("org.assertj:assertj-core:3.18.1")
 
 compile 'org.beanfabrics:beanfabrics-core:1.4.3'
-// wo binde ich beanfabrics fx ein?
 }
 
 //add
