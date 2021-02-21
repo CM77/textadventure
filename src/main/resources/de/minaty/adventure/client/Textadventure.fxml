@@ -55,7 +55,7 @@
                   </HBox>
                </children>
             </GridPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true">
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
                <content>
                   <TextArea fx:id="textausgabeTa" editable="false" />
                </content>
