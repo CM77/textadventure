@@ -14,9 +14,6 @@ mainClassName = 'de.minaty.adventure.client.TextadventureMain'
 
 repositories {
     mavenCentral()
-    flatDir {
-        dir 'lib'
-    }
 }
 
 dependencies {
@@ -25,8 +22,6 @@ api 'com.google.guava:guava:23.0'
 testImplementation(platform('org.junit:junit-bom:5.7.0'))
 testImplementation('org.junit.jupiter:junit-jupiter')
 testCompile("org.assertj:assertj-core:3.18.1")
-
-compile 'org.beanfabrics:beanfabrics-core:1.4.3'
 }
 
 //add
