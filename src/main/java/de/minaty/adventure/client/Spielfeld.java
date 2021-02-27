@@ -2,8 +2,10 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import de.minaty.adventure.client.gegenstaende.Gegenstand;
@@ -39,6 +41,10 @@ public class Spielfeld {
 	private Set<Gegenstand> setMitAllenGegenstaenden = new HashSet<Gegenstand>();
 	private Set<Gegenstand> setMitGegenstaendenAktuellerRaum = new HashSet<Gegenstand>();
 	private Set<Method> setMitGegenstandAktionen = new HashSet<Method>();
+	private List<Gegenstand> listeMitGegenstaendenImRucksack = new ArrayList<Gegenstand>();
+	private Set<Method> setMitRucksackGegenstandAktionen = new HashSet<Method>();
+
+	// Räume
 
 	public Point getMARIENPLATZ() {
 		return MARIENPLATZ;
@@ -58,22 +64,6 @@ public class Spielfeld {
 
 	public Point getKELLER() {
 		return KELLER;
-	}
-
-	public Samuraischwert getSamuraischwert() {
-		return samuraischwert;
-	}
-
-	public void setSamuraischwert(Samuraischwert samuraischwert) {
-		this.samuraischwert = samuraischwert;
-	}
-
-	public Apfel getApfel() {
-		return gruenerApfel;
-	}
-
-	public void setApfel(Apfel apfel) {
-		this.gruenerApfel = apfel;
 	}
 
 	public Point getAktuelleSpielerPosition() {
@@ -108,6 +98,24 @@ public class Spielfeld {
 		this.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
 	}
 
+	// Gegenstände
+
+	public Samuraischwert getSamuraischwert() {
+		return samuraischwert;
+	}
+
+	public void setSamuraischwert(Samuraischwert samuraischwert) {
+		this.samuraischwert = samuraischwert;
+	}
+
+	public Apfel getApfel() {
+		return gruenerApfel;
+	}
+
+	public void setApfel(Apfel apfel) {
+		this.gruenerApfel = apfel;
+	}
+
 	public Set<Gegenstand> getSetMitAllenGegenstaenden() {
 		return setMitAllenGegenstaenden;
 	}
@@ -115,6 +123,8 @@ public class Spielfeld {
 	public void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
 		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
 	}
+
+	// Gegenstände im Raum
 
 	public Set<Gegenstand> getSetMitGegenstaendenAktuellerRaum() {
 		return setMitGegenstaendenAktuellerRaum;
@@ -130,6 +140,24 @@ public class Spielfeld {
 
 	public void setSetMitGegenstandAktionen(Set<Method> setMitGegenstandAktionen) {
 		this.setMitGegenstandAktionen = setMitGegenstandAktionen;
+	}
+
+	// Gegenstände im Rucksack
+
+	public List<Gegenstand> getListeMitGegenstaendenImRucksack() {
+		return listeMitGegenstaendenImRucksack;
+	}
+
+	public void setListeMitGegenstaendenImRucksack(List<Gegenstand> setMitGegenstaendenImRucksack) {
+		this.listeMitGegenstaendenImRucksack = setMitGegenstaendenImRucksack;
+	}
+
+	public Set<Method> getSetMitRucksackGegenstandAktionen() {
+		return setMitRucksackGegenstandAktionen;
+	}
+
+	public void setSetMitRucksackGegenstandAktionen(Set<Method> setMitRucksackGegenstandAktionen) {
+		this.setMitRucksackGegenstandAktionen = setMitRucksackGegenstandAktionen;
 	}
 
 	public void initSpielfeld() {
@@ -190,6 +218,9 @@ public class Spielfeld {
 		for (Gegenstand gegenstand : setMitAllenGegenstaenden) {
 			if (gegenstand.getPosition().equals(spieler.getPosition())) {
 				setMitGegenstaendenAktuellerRaum.add(gegenstand);
+				if (gegenstand.isMitgenommen()) {
+					setMitGegenstaendenAktuellerRaum.remove(gegenstand);
+				}
 			}
 		}
 		return setMitGegenstaendenAktuellerRaum;
@@ -201,5 +232,17 @@ public class Spielfeld {
 			setMitGegenstandAktionen.add(methode);
 		}
 		return setMitGegenstandAktionen;
+	}
+
+	public void gegenstandMitnehmen(Gegenstand gegenstand) {
+		listeMitGegenstaendenImRucksack.add(gegenstand);
+	}
+
+	public Set<Method> befuelleSetMitGegenstandImRucksackAktionen(Gegenstand g) {
+		setMitRucksackGegenstandAktionen.clear();
+		for (Method methode : g.getClass().getDeclaredMethods()) {
+			setMitRucksackGegenstandAktionen.add(methode);
+		}
+		return setMitRucksackGegenstandAktionen;
 	}
 }

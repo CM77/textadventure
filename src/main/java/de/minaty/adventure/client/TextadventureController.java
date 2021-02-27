@@ -48,29 +48,35 @@ public class TextadventureController implements Initializable {
 	@FXML
 	private MenuItem spielBeenden;
 	@FXML
+	private VBox aktionsOptionenVb;
+	@FXML
 	private Button raumButton;
 	@FXML
 	private Button gegenstandButton;
 	@FXML
 	private Button rucksackButton;
 	@FXML
-	private VBox vboxOben;
-	@FXML
-	private TextArea textausgabeTa; // TODO TextFlow für farbige Elemente hier?
-									// https://www.tutorialspoint.com/javafx/layout_panes_textflow.htm
+	private TextArea textausgabeTa; // TODO TextFlow für variable Schriftgröße etc?s
+									// www.tutorialspoint.com/javafx/layout_panes_textflow.htm
 	@FXML
 	private TextField aufenthaltsraumTf;
 
+	private Button erkundungsButton = new Button();
 	private Button nordButton = new Button("nach Norden gehen");
 	private Button suedButton = new Button("nach Süden gehen");
 	private Button ostButton = new Button("nach Osten gehen");
 	private Button westButton = new Button("nach Westen gehen");
-	private Button erkundungsButton = new Button();
+	private Button aktuellerGegenstandButton = new Button();
+	private Button aktuellerGegenstandImRucksackButton = new Button();
+
 	private List<Button> listeMitRaumAktionsButtons = new ArrayList<>(Arrays.asList());
 	private List<Button> listeMitGegenstandButtons = new ArrayList<>(Arrays.asList());
 	private List<Button> listeMitGegenstandAktionenButtons = new ArrayList<>(Arrays.asList());
+	private List<Button> listeMitGegenstandImRucksackButtons = new ArrayList<>(Arrays.asList());
+	private List<Button> listeMitGegenstandImRucksackAktionenButtons = new ArrayList<>(Arrays.asList());
+
 	private Gegenstand aktuellerGegenstand;
-	private Button aktuellerGegenstandButton = new Button();
+	private Gegenstand aktuellerGegenstandImRucksack;
 
 	Spieler spieler = new Spieler(new Point(1, 0), "spieler", 30, 10, 10);
 	Spielfeld spielfeld = new Spielfeld();
@@ -82,7 +88,8 @@ public class TextadventureController implements Initializable {
 		spielfeld.befuelleSetMitAllenGegenstaenden();
 		starteMenueSetup();
 		zeigeGegenstaende();
-		starteKeyEventHandler();
+		zeigeGegenstaendeImRucksack();
+		starteTastenEventHandler();
 		aufenthaltsraumTf.getStyleClass().add("aufenthaltsraumTf");
 	}
 
@@ -108,9 +115,8 @@ public class TextadventureController implements Initializable {
 
 	// Spielersteuerung
 
-	private void starteKeyEventHandler() {
+	private void starteTastenEventHandler() {
 		root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent event) {
 				switch (event.getCode()) {
@@ -122,28 +128,28 @@ public class TextadventureController implements Initializable {
 					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
 						spieler.nachSuedenBewegen();
 					}
-					textAusgabe("Du gehst nach Norden.");
+					textausgabe("Du gehst nach Norden.");
 					break;
 				case DOWN:
 					spieler.nachSuedenBewegen();
 					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
 						spieler.nachNordenBewegen();
 					}
-					textAusgabe("Du gehst nach Süden.");
+					textausgabe("Du gehst nach Süden.");
 					break;
 				case LEFT:
 					spieler.nachWestenBewegen();
 					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
 						spieler.nachOstenBewegen();
 					}
-					textAusgabe("Du gehst nach Osten.");
+					textausgabe("Du gehst nach Osten.");
 					break;
 				case RIGHT:
 					spieler.nachOstenBewegen();
 					if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) == null) {
 						spieler.nachWestenBewegen();
 					}
-					textAusgabe("Du gehst nach Westen.");
+					textausgabe("Du gehst nach Westen.");
 					break;
 				default:
 					break;
@@ -154,7 +160,7 @@ public class TextadventureController implements Initializable {
 
 	// TODO vor dem ersten Zug wirkt Leerzeile vor dem Aufenthaltsraum merkwürdig.
 	// Dort könnte Intro-Text rein?
-	private void textAusgabe(String ausgabe) {
+	private void textausgabe(String ausgabe) {
 		zeigeAufenthaltsraum();
 		textausgabeTa.appendText( //
 				"\n" //
@@ -185,7 +191,7 @@ public class TextadventureController implements Initializable {
 	// TODO Zug soll sofort Optionen in vBoxOben aktualisieren und nicht erst bei
 	// Klick auf "Raum"!
 	private void starteZugLogik() {
-		vboxOben.getChildren().clear();
+		aktionsOptionenVb.getChildren().clear();
 		listeMitRaumAktionsButtons.clear();
 		spielfeld.ermittleDieNachbarraeume(spieler);
 		spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler);
@@ -219,16 +225,16 @@ public class TextadventureController implements Initializable {
 
 	private void himmelsrichtungButtonsAktivieren() {
 		nordButton.setOnAction(e -> {
-			textAusgabe(spieler.nachNordenBewegen());
+			textausgabe(spieler.nachNordenBewegen());
 		});
 		suedButton.setOnAction(e -> {
-			textAusgabe(spieler.nachSuedenBewegen());
+			textausgabe(spieler.nachSuedenBewegen());
 		});
 		ostButton.setOnAction(e -> {
-			textAusgabe(spieler.nachOstenBewegen());
+			textausgabe(spieler.nachOstenBewegen());
 		});
 		westButton.setOnAction(e -> {
-			textAusgabe(spieler.nachWestenBewegen());
+			textausgabe(spieler.nachWestenBewegen());
 		});
 	}
 
@@ -240,9 +246,11 @@ public class TextadventureController implements Initializable {
 
 	private void erkundungsButtonAktivieren() {
 		erkundungsButton.setOnAction(e -> {
-			textAusgabe(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
+			textausgabe(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
 	}
+
+	// Gegenstands-Steuerung
 
 	private void zeigeGegenstaende() {
 		gegenstandButton.setOnAction(e -> {
@@ -252,7 +260,7 @@ public class TextadventureController implements Initializable {
 
 	private void starteGegenstandsLogik() {
 		zeigeAufenthaltsraum();
-		vboxOben.getChildren().clear();
+		aktionsOptionenVb.getChildren().clear();
 		listeMitGegenstandButtons.clear();
 		fuegeGegenstandButtonsInListe();
 		gegenstandButtonsVorbereiten();
@@ -283,7 +291,7 @@ public class TextadventureController implements Initializable {
 
 	private void starteGegenstandAktionenLogik() {
 		zeigeAufenthaltsraum();
-		vboxOben.getChildren().clear();
+		aktionsOptionenVb.getChildren().clear();
 		fuegeGegenstandAktionenButtonsInListe();
 		gegenstandAktionenButtonsVorbereiten();
 		gegenstandAktionenButtonsAktivieren();
@@ -316,7 +324,99 @@ public class TextadventureController implements Initializable {
 						try {
 							methode = aktuellerGegenstand.getClass().getDeclaredMethod(methode.getName());
 							methode.setAccessible(true);
-							textausgabeTa.appendText(methode.invoke(aktuellerGegenstand).toString());
+							if (methode.getName().equalsIgnoreCase("mitnehmen")
+									&& (!aktuellerGegenstand.isMitgenommen())) {
+								spielfeld.gegenstandMitnehmen(aktuellerGegenstand);
+								textausgabe(methode.invoke(aktuellerGegenstand).toString());
+							} else {
+								textausgabe(methode.invoke(aktuellerGegenstand).toString());
+							}
+						} catch (NoSuchMethodException | SecurityException | IllegalAccessException
+								| IllegalArgumentException | InvocationTargetException excep) {
+							excep.printStackTrace();
+						}
+					}
+				}
+			});
+		}
+	}
+
+	// Rucksack-Steuerung: mitgenommene Gegenstände
+
+	private void zeigeGegenstaendeImRucksack() {
+		rucksackButton.setOnAction(e -> {
+			starteGegenstandImRucksackLogik();
+		});
+	}
+
+	private void starteGegenstandImRucksackLogik() {
+		zeigeAufenthaltsraum();
+		aktionsOptionenVb.getChildren().clear();
+		listeMitGegenstandImRucksackButtons.clear();
+		fuegeGegenstandImRucksackButtonsInListe();
+		gegenstandImRucksackButtonsVorbereiten();
+		gegenstandImRucksackButtonsAktivieren();
+	}
+
+	private void fuegeGegenstandImRucksackButtonsInListe() {
+		for (Gegenstand gegenstand : spielfeld.getListeMitGegenstaendenImRucksack()) {
+			listeMitGegenstandImRucksackButtons.add(new Button(gegenstand.getName()));
+		}
+	}
+
+	private void gegenstandImRucksackButtonsVorbereiten() {
+		for (Button button : listeMitGegenstandImRucksackButtons) {
+			buttonMitStyleVersehenUndEinhaengen(button);
+		}
+	}
+
+	private void gegenstandImRucksackButtonsAktivieren() {
+		for (Button button : listeMitGegenstandImRucksackButtons) {
+			button.setOnAction(e -> {
+				aktuellerGegenstandImRucksackButton = button;
+				starteGegenstandImRucksackAktionenLogik();
+			});
+		}
+	}
+
+	// Rucksack-Steuerung: mitgenommene Gegenstands-Aktionen
+
+	private void starteGegenstandImRucksackAktionenLogik() {
+		zeigeAufenthaltsraum();
+		aktionsOptionenVb.getChildren().clear();
+		fuegeGegenstandImRucksackAktionenButtonsInListe();
+		gegenstandImRucksackAktionenButtonsVorbereiten();
+		gegenstandImRucksackAktionenButtonsAktivieren();
+		listeMitGegenstandImRucksackAktionenButtons.clear();
+	}
+
+	private void fuegeGegenstandImRucksackAktionenButtonsInListe() {
+		for (Gegenstand g : spielfeld.getListeMitGegenstaendenImRucksack()) {
+			if (aktuellerGegenstandImRucksackButton.getText().equalsIgnoreCase(g.getName())) {
+				spielfeld.befuelleSetMitGegenstandImRucksackAktionen(g);
+				aktuellerGegenstand = g;
+				for (Method m : spielfeld.getSetMitGegenstandAktionen()) {
+					listeMitGegenstandImRucksackAktionenButtons.add(new Button(m.getName()));
+				}
+			}
+		}
+	}
+
+	private void gegenstandImRucksackAktionenButtonsVorbereiten() {
+		for (Button button : listeMitGegenstandImRucksackAktionenButtons) {
+			buttonMitStyleVersehenUndEinhaengen(button);
+		}
+	}
+
+	private void gegenstandImRucksackAktionenButtonsAktivieren() {
+		for (Button button : listeMitGegenstandImRucksackAktionenButtons) {
+			button.setOnAction(e -> {
+				for (Method methode : spielfeld.getSetMitRucksackGegenstandAktionen()) {
+					if (button.getText().equals(methode.getName())) {
+						try {
+							methode = aktuellerGegenstandImRucksack.getClass().getDeclaredMethod(methode.getName());
+							methode.setAccessible(true);
+							textausgabe(methode.invoke(aktuellerGegenstandImRucksack).toString());
 						} catch (NoSuchMethodException | SecurityException | IllegalAccessException
 								| IllegalArgumentException | InvocationTargetException excep) {
 							// TODO Excep-Message
@@ -331,7 +431,7 @@ public class TextadventureController implements Initializable {
 	private void buttonMitStyleVersehenUndEinhaengen(Button button) {
 		button.getStyleClass().add("buttonAuswahlAktion");
 		button.setAlignment(Pos.BASELINE_LEFT);
-		vboxOben.getChildren().addAll(button);
+		aktionsOptionenVb.getChildren().addAll(button);
 		button.setMaxWidth(Double.MAX_VALUE);
 		VBox.setVgrow(button, Priority.ALWAYS);
 	}

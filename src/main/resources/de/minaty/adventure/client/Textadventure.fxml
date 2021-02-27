@@ -23,7 +23,7 @@
         <items>
             <ScrollPane fitToHeight="true" fitToWidth="true">
                <content>
-                  <VBox fx:id="vboxOben" />
+                  <VBox fx:id="aktionsOptionenVb" />
                </content>
             </ScrollPane>
             <GridPane SplitPane.resizableWithParent="false">
