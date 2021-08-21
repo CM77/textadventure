@@ -161,11 +161,11 @@ public class Spielfeld {
 	}
 
 	public void initSpielfeld() {
-		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz("Marienplatz"));
-		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller("Keller"));
-		mapAllerRaeumeInDerSpielwelt.put(STACHUS, new Stachus("Stachus"));
-		mapAllerRaeumeInDerSpielwelt.put(WENDELTREPPE, new Wendeltreppe("Wendeltreppe"));
-		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße("Kapellenstraße"));
+		mapAllerRaeumeInDerSpielwelt.put(MARIENPLATZ, new Marienplatz(MARIENPLATZ, "Marienplatz"));
+		mapAllerRaeumeInDerSpielwelt.put(KELLER, new Keller(KELLER, "Keller"));
+		mapAllerRaeumeInDerSpielwelt.put(STACHUS, new Stachus(STACHUS, "Stachus"));
+		mapAllerRaeumeInDerSpielwelt.put(WENDELTREPPE, new Wendeltreppe(WENDELTREPPE, "Wendeltreppe"));
+		mapAllerRaeumeInDerSpielwelt.put(KAPELLENSTRASSE, new Kapellenstraße(KAPELLENSTRASSE, "Kapellenstraße"));
 	}
 
 	public Raum ermittleAufenthaltsraumSpieler(Spieler spieler) {

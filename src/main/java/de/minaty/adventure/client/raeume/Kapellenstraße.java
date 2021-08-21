@@ -1,9 +1,12 @@
 package de.minaty.adventure.client.raeume;
 
+import java.awt.Point;
+
 public final class Kapellenstraße extends Raum {
 
-	public Kapellenstraße(String nameDesSpielobjekts) {
-		super(nameDesSpielobjekts);
+	public Kapellenstraße(Point position, String name) {
+		super(position, name);
+		this.position = position;
 	}
 
 	@Override

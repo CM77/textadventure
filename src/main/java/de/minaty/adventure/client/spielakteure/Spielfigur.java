@@ -2,7 +2,7 @@ package de.minaty.adventure.client.spielakteure;
 
 import java.awt.Point;
 
-public abstract class Spielfigur extends Spielobjekt implements Anschaubar {
+public abstract class Spielfigur extends Spielobjekt implements Bewegbar {
 
 	private int staerke;
 	private int attacke;

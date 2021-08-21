@@ -10,7 +10,6 @@ public final class Spieler extends Spielfigur implements Bewegbar {
 		super(position, name, staerke, attacke, parade);
 	}
 
-	@Override
 	public String anschauen() {
 		return "Du schaust dich selber an, aber irgendwie siehst du nur deine Hände, deine Hose und deine Schuhe. Ein Spiegel verrät vielleicht mehr über dein (hoffentlich) Top-Model-haftes Aussehen.";
 	}

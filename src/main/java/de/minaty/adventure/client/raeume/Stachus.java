@@ -1,9 +1,12 @@
 package de.minaty.adventure.client.raeume;
 
+import java.awt.Point;
+
 public final class Stachus extends Raum {
 
-	public Stachus(String name) {
-		super(name);
+	public Stachus(Point position, String name) {
+		super(position, name);
+		this.position = position;
 	}
 
 	@Override

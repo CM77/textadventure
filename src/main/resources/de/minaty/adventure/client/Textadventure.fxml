@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
+<BorderPane fx:id="root" prefHeight="1048.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
    <center>
       <SplitPane dividerPositions="0.3, 0.4" orientation="VERTICAL" prefHeight="504.0" prefWidth="800.0">
         <items>
@@ -94,7 +94,7 @@
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="aufenthaltsraumTf" editable="false"/>
+            <TextField fx:id="aufenthaltsraumTf" editable="false" />
          </children>
       </GridPane>
    </bottom>
