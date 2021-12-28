@@ -1,13 +1,12 @@
 plugins {
-    id 'java-library'
-    id 'eclipse'
-    id 'application'
-  	id 'org.openjfx.javafxplugin' version '0.0.8'
+  id 'java'
+  id 'application'
+  id "org.openjfx.javafxplugin" version "0.0.10"
 }
 
 apply plugin: 'java'
-sourceCompatibility = 15
-targetCompatibility = 15
+sourceCompatibility = 17
+targetCompatibility = 17
 
 //add
 mainClassName = 'de.minaty.adventure.client.TextadventureMain'
@@ -17,15 +16,22 @@ repositories {
 }
 
 dependencies {
-api 'com.google.guava:guava:23.0'
+// https://mvnrepository.com/artifact/com.google.guava/guava
+implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
 
-testImplementation(platform('org.junit:junit-bom:5.7.0'))
-testImplementation('org.junit.jupiter:junit-jupiter')
-testCompile("org.assertj:assertj-core:3.18.1")
+// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.2'
+
+// https://mvnrepository.com/artifact/org.assertj/assertj-core
+testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.21.0'
 }
 
 //add
 javafx {
-    version = "15"
+    version = "17"
     modules = [ 'javafx.base',  'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.swing', 'javafx.web']
+}
+
+application {
+    mainClass = 'TextadventureApp' 
 }
