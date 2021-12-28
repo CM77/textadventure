@@ -11,6 +11,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
+<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
    <center>
       <SplitPane dividerPositions="0.32592592592592595, 0.4" orientation="VERTICAL">
         <items>
@@ -84,7 +85,19 @@
             </GridPane>
             <ScrollPane fitToHeight="true" fitToWidth="true">
                <content>
-                  <TextArea fx:id="textausgabeTa" editable="false" />
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextArea fx:id="textausgabeTa" editable="false" />
+                        <ImageView fitHeight="424.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </content>
             </ScrollPane>
         </items>
