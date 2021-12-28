@@ -22,5 +22,7 @@ public class TextadventureApp extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+		System.out.println("javafx.runtime.version: " + System.getProperties().get("javafx.runtime.version")); // TODO
+																												// löschen
 	}
 }
