@@ -34,7 +34,6 @@ public class Spielfeld {
 	private Apfel gruenerApfel = new Apfel(KELLER, "grüner Apfel", 1);
 	private Apfel roterApfel = new Apfel(STACHUS, "roter Apfel", 1);
 
-	private Point aktuelleSpielerPosition;
 	private HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt = new HashMap<>();
 	private HashMap<Point, Raum> mapAllerAktuellenNachbarraeume = new HashMap<>();
 	private HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen = new HashMap<>();
@@ -46,56 +45,16 @@ public class Spielfeld {
 
 	// Räume
 
-	public Point getMARIENPLATZ() {
-		return MARIENPLATZ;
-	}
-
-	public Point getSTACHUS() {
-		return STACHUS;
-	}
-
-	public Point getKAPELLENSTRASSE() {
-		return KAPELLENSTRASSE;
-	}
-
-	public Point getWENDELTREPPE() {
-		return WENDELTREPPE;
-	}
-
-	public Point getKELLER() {
-		return KELLER;
-	}
-
-	public Point getAktuelleSpielerPosition() {
-		return aktuelleSpielerPosition;
-	}
-
-	public void setAktuelleSpielerPosition(Point aktuelleSpielerPosition) {
-		this.aktuelleSpielerPosition = aktuelleSpielerPosition;
-	}
-
 	public HashMap<Point, Raum> getMapAllerRaeumeInDerSpielwelt() {
 		return mapAllerRaeumeInDerSpielwelt;
-	}
-
-	public void setMapAllerRaeumeInDerSpielwelt(HashMap<Point, Raum> mapAllerRaeumeInDerSpielwelt) {
-		this.mapAllerRaeumeInDerSpielwelt = mapAllerRaeumeInDerSpielwelt;
 	}
 
 	public HashMap<Point, Raum> getMapAllerAktuellenNachbarraeume() {
 		return mapAllerAktuellenNachbarraeume;
 	}
 
-	public void setMapAllerAktuellenNachbarraeume(HashMap<Point, Raum> mapAllerAktuellenNachbarraeume) {
-		this.mapAllerAktuellenNachbarraeume = mapAllerAktuellenNachbarraeume;
-	}
-
 	public HashMap<Raum, Himmelsrichtung> getMapMoeglicherHimmelsrichtungen() {
 		return mapMoeglicherHimmelsrichtungen;
-	}
-
-	public void setMapMoeglicherHimmelsrichtungen(HashMap<Raum, Himmelsrichtung> mapMoeglicherHimmelsrichtungen) {
-		this.mapMoeglicherHimmelsrichtungen = mapMoeglicherHimmelsrichtungen;
 	}
 
 	// Gegenstände
@@ -116,30 +75,14 @@ public class Spielfeld {
 		this.gruenerApfel = apfel;
 	}
 
-	public Set<Gegenstand> getSetMitAllenGegenstaenden() {
-		return setMitAllenGegenstaenden;
-	}
-
-	public void setSetMitAllenGegenstaenden(Set<Gegenstand> setMitAllenGegenstaenden) {
-		this.setMitAllenGegenstaenden = setMitAllenGegenstaenden;
-	}
-
 	// Gegenstände im Raum
 
 	public Set<Gegenstand> getSetMitGegenstaendenAktuellerRaum() {
 		return setMitGegenstaendenAktuellerRaum;
 	}
 
-	public void setSetMitGegenstaendenAktuellerRaum(Set<Gegenstand> setMitAllenGegenstaendenAktuellerRaum) {
-		this.setMitGegenstaendenAktuellerRaum = setMitAllenGegenstaendenAktuellerRaum;
-	}
-
 	public Set<Method> getSetMitGegenstandAktionen() {
 		return setMitGegenstandAktionen;
-	}
-
-	public void setSetMitGegenstandAktionen(Set<Method> setMitGegenstandAktionen) {
-		this.setMitGegenstandAktionen = setMitGegenstandAktionen;
 	}
 
 	// Gegenstände im Rucksack
@@ -154,10 +97,6 @@ public class Spielfeld {
 
 	public Set<Method> getSetMitRucksackGegenstandAktionen() {
 		return setMitRucksackGegenstandAktionen;
-	}
-
-	public void setSetMitRucksackGegenstandAktionen(Set<Method> setMitRucksackGegenstandAktionen) {
-		this.setMitRucksackGegenstandAktionen = setMitRucksackGegenstandAktionen;
 	}
 
 	public void initSpielfeld() {

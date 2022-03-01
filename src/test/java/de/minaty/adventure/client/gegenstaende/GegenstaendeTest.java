@@ -30,18 +30,6 @@ public class GegenstaendeTest {
 	}
 
 	@Test
-	public void test_Position__default_Gegenstaende_Stachus_neu() {
-		// Given:
-		Samuraischwert schwert = spielfeld.getSamuraischwert();
-		Point expectedRaumMitGegenstand = spielfeld.getSTACHUS();
-
-		// When:
-
-		// Then:
-		assertEquals(schwert.getPosition(), expectedRaumMitGegenstand);
-	}
-
-	@Test
 	public void test_Position__bewege_Gegenstand_in_anderen_Raum() {
 		// Given:
 		Samuraischwert schwert = spielfeld.getSamuraischwert();
