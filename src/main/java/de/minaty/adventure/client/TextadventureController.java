@@ -79,7 +79,7 @@ public class TextadventureController implements Initializable {
 	private Gegenstand aktuellerGegenstandImRucksack;
 
 	Spieler spieler = new Spieler(new Point(1, 0), "spieler", 30, 10, 10);
-	Spielfeld spielfeld = new Spielfeld();
+	Spielfeld spielfeld = Spielfeld.getInstance();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

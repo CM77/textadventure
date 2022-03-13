@@ -12,7 +12,7 @@ import de.minaty.adventure.client.Spielfeld;
 
 public class SpielerBewegungTest {
 
-	Spielfeld spielfeld = new Spielfeld();
+	Spielfeld spielfeld = Spielfeld.getInstance();
 	Point startPosition = new Point(1, 0);
 	Spieler spielerActual = new Spieler(startPosition, "spieler", 30, 12, 10);
 

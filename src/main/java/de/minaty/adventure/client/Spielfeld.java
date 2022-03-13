@@ -24,6 +24,18 @@ public class Spielfeld {
 	// TODO nicht lieber Position gleich in jeweiligen Raum konkret festschreiben
 	// anstatt vom Spielfeld auszulesen?
 
+	private static Spielfeld instance;
+
+	private Spielfeld() {
+	}
+
+	public static Spielfeld getInstance() {
+		if (instance == null) {
+			instance = new Spielfeld();
+		}
+		return instance;
+	}
+
 	private final Point MARIENPLATZ = new Point(1, 0);
 	private final Point STACHUS = new Point(0, 0);
 	private final Point KAPELLENSTRASSE = new Point(0, 1);

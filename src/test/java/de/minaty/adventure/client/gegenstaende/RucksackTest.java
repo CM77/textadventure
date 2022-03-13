@@ -14,7 +14,7 @@ import de.minaty.adventure.client.spielakteure.Spieler;
 
 public class RucksackTest {
 
-	Spielfeld spielfeld = new Spielfeld();
+	Spielfeld spielfeld = Spielfeld.getInstance();
 	Point stachus = new Point(0, 0);
 	Spieler spielerActual = new Spieler(stachus, "Spieler", 30, 12, 10);
 
