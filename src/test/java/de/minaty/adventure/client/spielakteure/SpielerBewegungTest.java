@@ -14,12 +14,12 @@ public class SpielerBewegungTest {
 
 	Spielfeld spielfeld = Spielfeld.getInstance();
 	Point startPosition = new Point(1, 0);
-	Spieler spielerActual = new Spieler(startPosition, "spieler", 30, 12, 10);
+	Spieler spielerActual = new Spieler();
 
 	@BeforeEach
 	public void init() {
-		spielfeld.getMapAllerRaeumeInDerSpielwelt().clear();
-		spielfeld.getMapAllerAktuellenNachbarraeume().clear();
+		spielfeld.getAlleRaeume().clear();
+		spielfeld.getNachbarraeume().clear();
 		spielfeld.initSpielfeld();
 	}
 

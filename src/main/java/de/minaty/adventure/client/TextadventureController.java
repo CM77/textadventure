@@ -2,18 +2,13 @@ package de.minaty.adventure.client;
 
 import java.awt.Point;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import de.minaty.adventure.client.gegenstaende.Gegenstand;
-import de.minaty.adventure.client.raeume.Raum;
 import de.minaty.adventure.client.spielakteure.Spieler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -66,29 +61,18 @@ public class TextadventureController implements Initializable {
 	private Button suedButton = new Button("nach Süden gehen");
 	private Button ostButton = new Button("nach Osten gehen");
 	private Button westButton = new Button("nach Westen gehen");
-	private Button aktuellerGegenstandButton = new Button();
-	private Button aktuellerGegenstandImRucksackButton = new Button();
 
 	private List<Button> listeMitRaumAktionsButtons = new ArrayList<>(Arrays.asList());
-	private List<Button> listeMitGegenstandButtons = new ArrayList<>(Arrays.asList());
-	private List<Button> listeMitGegenstandAktionenButtons = new ArrayList<>(Arrays.asList());
-	private List<Button> listeMitGegenstandImRucksackButtons = new ArrayList<>(Arrays.asList());
-	private List<Button> listeMitGegenstandImRucksackAktionenButtons = new ArrayList<>(Arrays.asList());
 
-	private Gegenstand aktuellerGegenstand;
-	private Gegenstand aktuellerGegenstandImRucksack;
-
-	Spieler spieler = new Spieler(new Point(1, 0), "spieler", 30, 10, 10);
+	Spieler spieler = new Spieler();
 	Spielfeld spielfeld = Spielfeld.getInstance();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		spieler.setPosition(new Point(0, 0)); // TODO
 		spielfeld.initSpielfeld();
 		zeigeOptionenAufenthaltsraum();
-		spielfeld.befuelleSetMitAllenGegenstaenden();
 		starteMenueSetup();
-		zeigeGegenstaende();
-		zeigeGegenstaendeImRucksack();
 		starteTastenEventHandler();
 		aufenthaltsraumTf.getStyleClass().add("aufenthaltsraumTf");
 	}
@@ -114,6 +98,8 @@ public class TextadventureController implements Initializable {
 	}
 
 	// Spielersteuerung
+
+	// TODO in eigene Klasse auslagern
 
 	private void starteTastenEventHandler() {
 		root.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -174,10 +160,8 @@ public class TextadventureController implements Initializable {
 	// Orts-Aktualisierung im textausgabeTa. Label evtl für andere wichtige Werte
 	// wie Lebensenergie, Zeit etc. nutzen?
 	private void zeigeAufenthaltsraum() {
-		if (spielfeld.ermittleAufenthaltsraumSpieler(spieler) != null) {
-			aufenthaltsraumTf.setText("Du bist hier: " //
-					+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
-		}
+		aufenthaltsraumTf.setText("Du bist hier: " //
+				+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
 	}
 
 	private void zeigeOptionenAufenthaltsraum() {
@@ -201,19 +185,23 @@ public class TextadventureController implements Initializable {
 	}
 
 	private void fuegeZugbuttonsInListe() {
-		for (Entry<Raum, Himmelsrichtung> entry : spielfeld.getMapMoeglicherHimmelsrichtungen().entrySet()) {
-			if (nordButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitRaumAktionsButtons.add(nordButton);
-			}
-			if (suedButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitRaumAktionsButtons.add(suedButton);
-			}
-			if (ostButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitRaumAktionsButtons.add(ostButton);
-			}
-			if (westButton.getText().contains(entry.getValue().richtungName)) {
-				listeMitRaumAktionsButtons.add(westButton);
-			}
+		switch (spielfeld.ermittleMoeglicheHimmelsrichtungen(spieler)) {
+		case NORDEN: {
+			listeMitRaumAktionsButtons.add(nordButton);
+			break;
+		}
+		case SUEDEN: {
+			listeMitRaumAktionsButtons.add(suedButton);
+			break;
+		}
+		case WESTEN: {
+			listeMitRaumAktionsButtons.add(westButton);
+			break;
+		}
+		case OSTEN: {
+			listeMitRaumAktionsButtons.add(ostButton);
+			break;
+		}
 		}
 	}
 
@@ -248,184 +236,6 @@ public class TextadventureController implements Initializable {
 		erkundungsButton.setOnAction(e -> {
 			textausgabe(spielfeld.ermittleAufenthaltsraumSpieler(spieler).erkunden());
 		});
-	}
-
-	// Gegenstands-Steuerung
-
-	private void zeigeGegenstaende() {
-		gegenstandButton.setOnAction(e -> {
-			starteGegenstandsLogik();
-		});
-	}
-
-	private void starteGegenstandsLogik() {
-		zeigeAufenthaltsraum();
-		aktionsOptionenVb.getChildren().clear();
-		listeMitGegenstandButtons.clear();
-		fuegeGegenstandButtonsInListe();
-		gegenstandButtonsVorbereiten();
-		gegenstandButtonsAktivieren();
-	}
-
-	private void fuegeGegenstandButtonsInListe() {
-		spielfeld.befuelleSetMitGegenstaendenAktuellerRaum(spieler);
-		for (Gegenstand gegenstand : spielfeld.getSetMitGegenstaendenAktuellerRaum()) {
-			listeMitGegenstandButtons.add(new Button(gegenstand.getName()));
-		}
-	}
-
-	private void gegenstandButtonsVorbereiten() {
-		for (Button button : listeMitGegenstandButtons) {
-			buttonMitStyleVersehenUndEinhaengen(button);
-		}
-	}
-
-	private void gegenstandButtonsAktivieren() {
-		for (Button button : listeMitGegenstandButtons) {
-			button.setOnAction(e -> {
-				aktuellerGegenstandButton = button;
-				starteGegenstandAktionenLogik();
-			});
-		}
-	}
-
-	private void starteGegenstandAktionenLogik() {
-		zeigeAufenthaltsraum();
-		aktionsOptionenVb.getChildren().clear();
-		fuegeGegenstandAktionenButtonsInListe();
-		gegenstandAktionenButtonsVorbereiten();
-		gegenstandAktionenButtonsAktivieren();
-		listeMitGegenstandAktionenButtons.clear();
-	}
-
-	private void fuegeGegenstandAktionenButtonsInListe() {
-		for (Gegenstand gegenstand : spielfeld.getSetMitGegenstaendenAktuellerRaum()) {
-			if (aktuellerGegenstandButton.getText().equalsIgnoreCase(gegenstand.getName())) {
-				spielfeld.befuelleSetMitGegenstandAktionen(gegenstand);
-				aktuellerGegenstand = gegenstand;
-				for (Method m : spielfeld.getSetMitGegenstandAktionen()) {
-					listeMitGegenstandAktionenButtons.add(new Button(m.getName()));
-				}
-			}
-		}
-	}
-
-	private void gegenstandAktionenButtonsVorbereiten() {
-		for (Button button : listeMitGegenstandAktionenButtons) {
-			buttonMitStyleVersehenUndEinhaengen(button);
-		}
-	}
-
-	private void gegenstandAktionenButtonsAktivieren() {
-		for (Button button : listeMitGegenstandAktionenButtons) {
-			button.setOnAction(e -> {
-				for (Method methode : spielfeld.getSetMitGegenstandAktionen()) {
-					if (button.getText().equals(methode.getName())) {
-						try {
-							methode = aktuellerGegenstand.getClass().getDeclaredMethod(methode.getName());
-							methode.setAccessible(true);
-							if (methode.getName().equalsIgnoreCase("mitnehmen")
-									&& (!aktuellerGegenstand.isMitgenommen())) {
-								spielfeld.gegenstandMitnehmen(aktuellerGegenstand);
-								textausgabe(methode.invoke(aktuellerGegenstand).toString());
-							} else {
-								textausgabe(methode.invoke(aktuellerGegenstand).toString());
-							}
-						} catch (NoSuchMethodException | SecurityException | IllegalAccessException
-								| IllegalArgumentException | InvocationTargetException excep) {
-							excep.printStackTrace();
-						}
-					}
-				}
-			});
-		}
-	}
-
-	// Rucksack-Steuerung: mitgenommene Gegenstände
-
-	private void zeigeGegenstaendeImRucksack() {
-		rucksackButton.setOnAction(e -> {
-			starteGegenstandImRucksackLogik();
-		});
-	}
-
-	private void starteGegenstandImRucksackLogik() {
-		zeigeAufenthaltsraum();
-		aktionsOptionenVb.getChildren().clear();
-		listeMitGegenstandImRucksackButtons.clear();
-		fuegeGegenstandImRucksackButtonsInListe();
-		gegenstandImRucksackButtonsVorbereiten();
-		gegenstandImRucksackButtonsAktivieren();
-	}
-
-	private void fuegeGegenstandImRucksackButtonsInListe() {
-		for (Gegenstand gegenstand : spielfeld.getListeMitGegenstaendenImRucksack()) {
-			listeMitGegenstandImRucksackButtons.add(new Button(gegenstand.getName()));
-		}
-	}
-
-	private void gegenstandImRucksackButtonsVorbereiten() {
-		for (Button button : listeMitGegenstandImRucksackButtons) {
-			buttonMitStyleVersehenUndEinhaengen(button);
-		}
-	}
-
-	private void gegenstandImRucksackButtonsAktivieren() {
-		for (Button button : listeMitGegenstandImRucksackButtons) {
-			button.setOnAction(e -> {
-				aktuellerGegenstandImRucksackButton = button;
-				starteGegenstandImRucksackAktionenLogik();
-			});
-		}
-	}
-
-	// Rucksack-Steuerung: mitgenommene Gegenstands-Aktionen
-
-	private void starteGegenstandImRucksackAktionenLogik() {
-		zeigeAufenthaltsraum();
-		aktionsOptionenVb.getChildren().clear();
-		fuegeGegenstandImRucksackAktionenButtonsInListe();
-		gegenstandImRucksackAktionenButtonsVorbereiten();
-		gegenstandImRucksackAktionenButtonsAktivieren();
-		listeMitGegenstandImRucksackAktionenButtons.clear();
-	}
-
-	private void fuegeGegenstandImRucksackAktionenButtonsInListe() {
-		for (Gegenstand g : spielfeld.getListeMitGegenstaendenImRucksack()) {
-			if (aktuellerGegenstandImRucksackButton.getText().equalsIgnoreCase(g.getName())) {
-				spielfeld.befuelleSetMitGegenstandImRucksackAktionen(g);
-				aktuellerGegenstand = g;
-				for (Method m : spielfeld.getSetMitGegenstandAktionen()) {
-					listeMitGegenstandImRucksackAktionenButtons.add(new Button(m.getName()));
-				}
-			}
-		}
-	}
-
-	private void gegenstandImRucksackAktionenButtonsVorbereiten() {
-		for (Button button : listeMitGegenstandImRucksackAktionenButtons) {
-			buttonMitStyleVersehenUndEinhaengen(button);
-		}
-	}
-
-	private void gegenstandImRucksackAktionenButtonsAktivieren() {
-		for (Button button : listeMitGegenstandImRucksackAktionenButtons) {
-			button.setOnAction(e -> {
-				for (Method methode : spielfeld.getSetMitRucksackGegenstandAktionen()) {
-					if (button.getText().equals(methode.getName())) {
-						try {
-							methode = aktuellerGegenstandImRucksack.getClass().getDeclaredMethod(methode.getName());
-							methode.setAccessible(true);
-							textausgabe(methode.invoke(aktuellerGegenstandImRucksack).toString());
-						} catch (NoSuchMethodException | SecurityException | IllegalAccessException
-								| IllegalArgumentException | InvocationTargetException excep) {
-							// TODO Excep-Message
-							System.err.println("Opala, somethign went wrong here!");
-						}
-					}
-				}
-			});
-		}
 	}
 
 	private void buttonMitStyleVersehenUndEinhaengen(Button button) {

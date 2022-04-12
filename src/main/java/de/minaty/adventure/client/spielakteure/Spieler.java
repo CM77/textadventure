@@ -1,14 +1,8 @@
 package de.minaty.adventure.client.spielakteure;
 
-import java.awt.Point;
-
 public final class Spieler extends Spielfigur implements Bewegbar {
 
 	// TODO Interface Waffe für Spieler und Monster
-
-	public Spieler(Point position, String name, int staerke, int attacke, int parade) {
-		super(position, name, staerke, attacke, parade);
-	}
 
 	public String anschauen() {
 		return "Du schaust dich selber an, aber irgendwie siehst du nur deine Hände, deine Hose und deine Schuhe. Ein Spiegel verrät vielleicht mehr über dein (hoffentlich) Top-Model-haftes Aussehen.";

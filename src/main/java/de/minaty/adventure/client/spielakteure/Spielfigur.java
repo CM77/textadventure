@@ -1,19 +1,10 @@
 package de.minaty.adventure.client.spielakteure;
 
-import java.awt.Point;
-
 public abstract class Spielfigur extends Spielobjekt implements Bewegbar {
 
 	private int staerke;
 	private int attacke;
 	private int parade;
-
-	Spielfigur(Point position, String name, int staerke, int attacke, int parade) {
-		super(position, name);
-		this.staerke = staerke;
-		this.attacke = attacke;
-		this.parade = parade;
-	}
 
 	public void attackieren() {
 	}

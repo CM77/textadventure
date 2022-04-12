@@ -7,12 +7,6 @@ public abstract class Spielobjekt {
 	protected Point position;
 	protected String name;
 
-	protected Spielobjekt(Point position, String name) {
-		super();
-		this.position = position;
-		this.name = name;
-	}
-
 	public Point getPosition() {
 		return position;
 	}
