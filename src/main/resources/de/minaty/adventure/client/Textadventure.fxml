@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="de.minaty.adventure.client.TextadventureController">
+<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.minaty.adventure.client.TextadventureController">
    <center>
       <SplitPane dividerPositions="0.32592592592592595, 0.4" orientation="VERTICAL">
         <items>
@@ -88,14 +88,14 @@
                   <GridPane>
                      <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS" />
-                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <TextArea fx:id="textausgabeTa" editable="false" wrapText="true" />
-                        <ImageView fitHeight="424.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <ImageView fx:id="roomIv" fitHeight="424.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </content>

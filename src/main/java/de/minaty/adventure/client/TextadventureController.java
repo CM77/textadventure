@@ -1,6 +1,7 @@
 package de.minaty.adventure.client;
 
 import java.awt.Point;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -54,6 +57,8 @@ public class TextadventureController implements Initializable {
 	private TextArea textausgabeTa; // TODO TextFlow für variable Schriftgröße etc?s
 									// www.tutorialspoint.com/javafx/layout_panes_textflow.htm
 	@FXML
+	private ImageView roomIv;
+	@FXML
 	private TextField aufenthaltsraumTf;
 
 	private Button erkundungsButton = new Button();
@@ -63,6 +68,7 @@ public class TextadventureController implements Initializable {
 	private Button westButton = new Button("nach Westen gehen");
 
 	private List<Button> listeMitRaumAktionsButtons = new ArrayList<>(Arrays.asList());
+	private String currentRoom;
 
 	Spieler spieler = new Spieler();
 	Spielfeld spielfeld = Spielfeld.getInstance();
@@ -151,17 +157,35 @@ public class TextadventureController implements Initializable {
 		textausgabeTa.appendText( //
 				"\n" //
 						+ "\n" //
-						+ "-- " + spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName() + " --" + "\n" //
+						+ "-- " + currentRoom + " --" + "\n" //
 						+ "\n" //
 						+ ausgabe);
+		try {
+			bildausgabe(currentRoom);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// TODO pics ebenfalls in DB auslagern
+	private void bildausgabe(String s) throws FileNotFoundException {
+		// Image image = new
+		// Image(getClass().getResourceAsStream("/images/keller.jpg"));
+		StringBuilder sb = new StringBuilder();
+		sb.append("/images/");
+		sb.append(s.toLowerCase());
+		sb.append(".png");
+		Image image = new Image(getClass().getResourceAsStream(sb.toString()));
+		roomIv.setImage(image);
 	}
 
 	// TODO muss aktueller Ort noch im Label ausgegeben werden? Siehe laufende
 	// Orts-Aktualisierung im textausgabeTa. Label evtl für andere wichtige Werte
 	// wie Lebensenergie, Zeit etc. nutzen?
 	private void zeigeAufenthaltsraum() {
-		aufenthaltsraumTf.setText("Du bist hier: " //
-				+ spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName());
+		currentRoom = spielfeld.ermittleAufenthaltsraumSpieler(spieler).getName();
+		aufenthaltsraumTf.setText("Du bist hier: " + currentRoom);
 	}
 
 	private void zeigeOptionenAufenthaltsraum() {
